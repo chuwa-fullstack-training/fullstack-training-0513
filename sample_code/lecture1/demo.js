@@ -1,10 +1,12 @@
 foo(); // foo
-fun(); // TypeError: fun is not a function
+// fun(); // TypeError: fun is not a function
 
 function foo() {
-  console.log('foo');
+  console.log("foo");
 }
 
-var fun = function() {
-  console.log('fun');
-}
+var fun = function () {
+  console.log("fun");
+};
+
+fun(); // fun
