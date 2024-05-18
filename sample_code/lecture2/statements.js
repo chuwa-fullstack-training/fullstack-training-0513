@@ -1,3 +1,4 @@
+'use strict';
 // Conditional Statements (if-else)
 /* test comment */
 
