@@ -5,6 +5,10 @@
 */
 function extend(o, p) {
     // implement your code here
+    for (let prop in p) {
+        o[prop] = p[prop];
+    }
+    return o;
 }
 
 /*
@@ -13,6 +17,14 @@ function extend(o, p) {
 */
 function union(o, p) {
     // implement your code here
+    let q = {};
+    for (let prop in p) {
+        q[prop] = p[prop];
+    }
+    for (let prop in o) {
+        q[prop] = o[prop];
+    }
+    return q;
 }
 
 /*
@@ -21,6 +33,12 @@ function union(o, p) {
 */
 function restrict(o, p) {
     // implement your code here
+    for (let prop in o) {
+        if(!p.hasOwnProperty(prop)){
+            delete o[prop];
+        }
+    }
+    return o;
 }
 
 /*
@@ -30,4 +48,11 @@ function restrict(o, p) {
 */
 function intersection(o, p) {
     // implement your code here
+    let q = {};
+    for (let prop in o) {
+        if(p.hasOwnProperty(prop)){
+            q[prop]=o[prop];
+        }
+    }
+    return q;
 }
