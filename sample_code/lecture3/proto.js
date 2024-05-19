@@ -2,23 +2,23 @@
  * __proto__
  */
 const dogPrototype = {
-  breed: 'Shepard',
+  breed: "Shepard",
   bark: function () {
-    console.log('Bark!');
+    console.log("Bark!");
   },
   sayMyName: function () {
-    console.log('My name is', this.name);
+    console.log("My name is", this.name);
   },
   fetch: function () {
-    console.log('Fetch!');
-  }
+    console.log("Fetch!");
+  },
 };
 
 // create many dogs
 let dogs = [];
 for (let i = 0; i < 10; i++) {
   const dog = {};
-  dog.name = 'dog' + i;
+  dog.name = "dog" + i;
   dog.age = i;
   // dog.bark = function () {}
   // dog.fetch = function () {}
@@ -38,18 +38,18 @@ function Dog(name, age) {
 }
 
 Dog.prototype.bark = function () {
-  console.log('Bark!');
+  console.log("Bark!");
 };
 Dog.prototype.sayMyName = function () {
-  console.log('My name is', this.name);
+  console.log("My name is", this.name);
 };
 Dog.prototype.fetch = function () {
-  console.log('Fetch!');
+  console.log("Fetch!");
 };
 
 dogs = [];
 for (let i = 0; i < 10; i++) {
-  dogs.push(Dog('dog' + i, i));
+  dogs.push(Dog("dog" + i, i));
 }
 
 dogs[0].sayMyName(); // My name is dog0
@@ -61,9 +61,9 @@ function Cat(name, age) {
 }
 
 Cat.prototype.sayMyName = function () {
-  console.log('My name is', this.name);
+  console.log("My name is", this.name);
 };
 
-const cat = new Cat('cat', 3);
+const cat = new Cat("cat", 3);
 cat.sayMyName(); // My name is cat
 // cat.sayMyName.call(cat);

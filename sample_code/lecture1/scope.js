@@ -10,7 +10,7 @@ function myFunction() {
     let blockVar = "I'm a block-scoped variable";
     const blockConst = "I'm a block-scoped constant";
 
-    const BLOCK_CONST = '';
+    const BLOCK_CONST = "";
 
     var test = 1;
     console.log(globalVar); // Accessible inside the function

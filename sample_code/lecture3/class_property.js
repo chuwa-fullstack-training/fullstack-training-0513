@@ -14,7 +14,7 @@ class Person {
 
   setAge(newAge) {
     // method to set value of private field
-    if (typeof newAge === 'number' && newAge > 0 && newAge <= 120) {
+    if (typeof newAge === "number" && newAge > 0 && newAge <= 120) {
       this.#age = newAge;
       return true;
     } else {
@@ -23,7 +23,7 @@ class Person {
   }
 }
 
-let john = new Person('John Doe', 25);
+let john = new Person("John Doe", 25);
 console.log(john.name); // Output: John Doe
 console.log(john.getAge()); // Output: 25
 john.setAge(30);
@@ -46,7 +46,7 @@ class Student extends Person {
   }
 }
 
-const student = new Student('John Doe', 20, 'Computer Science');
+const student = new Student("John Doe", 20, "Computer Science");
 console.log(student.name); // Output: John Doe
 console.log(student.age); // Output: undefined
 console.log(student.getAge());
