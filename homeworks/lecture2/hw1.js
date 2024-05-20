@@ -5,6 +5,10 @@
 */
 function extend(o, p) {
     // implement your code here
+    for (let prop in p) {
+        o[prop] = p[prop];
+    }
+    return o;
 }
 
 /*
@@ -13,6 +17,14 @@ function extend(o, p) {
 */
 function union(o, p) {
     // implement your code here
+    let newObject = {};
+    for (let prop in p) {
+        newObject[prop] = p[prop];
+    }
+    for (let prop in o) {
+        newObject[prop] = o[prop];
+    }
+    return newObject;
 }
 
 /*
@@ -21,6 +33,12 @@ function union(o, p) {
 */
 function restrict(o, p) {
     // implement your code here
+    for (let prop in o) {
+        if (!(prop in p)) {
+            delete o[prop];
+        }
+    }
+    return o;
 }
 
 /*
@@ -30,4 +48,45 @@ function restrict(o, p) {
 */
 function intersection(o, p) {
     // implement your code here
+    let newObject = {};
+    for (let prop in o) {
+        if (prop in p) {
+            newObject[prop] = o[prop];
+        }
+    }
+    return newObject;
 }
+
+
+/*
+Test Function1: Test extend
+*/
+// let o = {a: 1, b: 2};
+// let p = {b: 3, c: 4};
+// let result = extend(o,p);
+// console.log(o);
+
+/*
+Test Function2: Test union
+*/
+// let o = { a: 1, b: 2};
+// let p = { a: 3, c: 4};
+
+// let result = union(o,p);
+// console.log(result);
+
+/*
+Test Function 3: Test restrict
+*/
+// let o = {a: 1, b: 2, c: 3}
+// let p = {a: 4, d: 5}
+// let result = restrict(o,p);
+// console.log(result);
+
+/*
+Test Function 4: Test Intersection
+*/
+// let o = {a: 1, b: 2, c: 3};
+// let p = {b: 4, c: 5, d: 6};
+// let result = intersection(o,p);
+// console.log(result);
