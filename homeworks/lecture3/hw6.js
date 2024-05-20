@@ -19,6 +19,13 @@
  */
 function numIdenticalPairs(nums) {
   // implement here
+  let res = 0;
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[i] == nums[j]) res++;
+    }
+  }
+  return res;
 }
 
 /**
@@ -26,4 +33,18 @@ function numIdenticalPairs(nums) {
  */
 function removeVowels(s) {
   // implement here
+  let res = "";
+  const set = new Set(["a", "e", "i", "o", "u"]);
+  for (const char of s) {
+    if (!set.has(char)) res += char;
+  }
+  return res;
 }
+
+let nums1 = [1, 2, 3, 1, 1, 3];
+let nums2 = [1, 1, 1, 1];
+let nums3 = [1, 2, 3];
+console.log(numIdenticalPairs(nums1));
+console.log(numIdenticalPairs(nums2));
+console.log(numIdenticalPairs(nums3));
+console.log(removeVowels("asdfeiou asd"));
