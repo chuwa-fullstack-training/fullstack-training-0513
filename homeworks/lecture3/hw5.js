@@ -13,4 +13,17 @@
  */
 function User() {
     // implement here
+    let password = ''
+
+    this.setPassword = function (newPassword){
+        if (newPassword >= 6){
+            password = newPassword;
+        } else {
+            throw new Error('Password is too short')
+        }
+    }
+
+    this.checkPassword = function (input) {
+        return password === input
+    }
 }
