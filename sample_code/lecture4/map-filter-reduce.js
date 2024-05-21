@@ -8,7 +8,7 @@ const doubledNumbers = numbers.map(function (value, index, array) {
 console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
 
 // Filter
-const evenNumbers = numbers.filter(num => num % 2 === 0);
+const evenNumbers = numbers.filter((num) => num % 2 === 0);
 
 console.log(evenNumbers); // Output: [2, 4]
 
@@ -21,10 +21,10 @@ const sum = numbers.reduce(function (accumulator, currenctVal, index, array) {
 console.log(sum); // Output: 15
 
 const employees = [
-  { name: 'Zhang', jobTitle: 'Software Engineer', country: 'China' },
-  { name: 'Jack', jobTitle: 'Data Scientist', country: 'USA' },
-  { name: 'Jane', jobTitle: 'Project Manager', country: 'China' },
-  { name: 'Rajesh', jobTitle: 'Software Engineer', country: 'India' }
+  { name: "Zhang", jobTitle: "Software Engineer", country: "China" },
+  { name: "Jack", jobTitle: "Data Scientist", country: "USA" },
+  { name: "Jane", jobTitle: "Project Manager", country: "China" },
+  { name: "Rajesh", jobTitle: "Software Engineer", country: "India" },
 ];
 
 // {China: [{name: 'Zhang}, {}], USA: [{name: 'Jack'}]}
