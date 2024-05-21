@@ -19,11 +19,65 @@
  */
 function numIdenticalPairs(nums) {
   // implement here
+  let count = 0;
+  let map = {};
+  for (let num of nums) {
+    if (map[num]) {
+      count += map[num];
+      map[num]++;
+    } else {
+      map[num] = 1;
+    }
+  }
+
+  // brute force solution
+  // let count = 0;
+  // for (let i = 0; i < nums.length; i++) {
+  //   for (let j = i + 1; j < nums.length; j++) {
+  //     if (nums[i] === nums[j]) {
+  //       count++;
+  //     }
+  //   }
+  // }
+  return count;  
 }
+
+// Test cases
+// console.log(numIdenticalPairs([1,2,3,1,1,3])); // 4
+// console.log(numIdenticalPairs([1,1,1,1])); // 6
+// console.log(numIdenticalPairs([1,2,3])); // 0
+
 
 /**
  * Given a string s, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
  */
 function removeVowels(s) {
   // implement here
+  // brute force solution
+  let result = '';
+  for (let char of s) {
+    if (!'aeiou'.includes(char)) {
+      result += char;
+    }
+  }
+  return result;
+
+  // using array methods
+  // return s.split('').filter(char => !'aeiou'.includes(char)).join('');
+
+  // using regex
+  // return s.replace(/[aeiou]/g, '');
+
+  // use slice
+  // for (let i = 0; i < s.length; i++) {
+  //   if ('aeiou'.includes(s[i])) {
+  //     s = s.slice(0, i) + s.slice(i + 1);
+  //     i--;
+  //   }
+  // }
+  // return s;
 }
+
+// Test cases
+console.log(removeVowels('leetcode')); // ltcd
+console.log(removeVowels('aeiou')); // ''

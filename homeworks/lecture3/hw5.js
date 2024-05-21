@@ -11,6 +11,31 @@
  * user.checkPassword('123'); // false
  * user.password; // undefined
  */
+// in es5:
 function User() {
-    // implement here
+    var password = undefined;
+
+    function setPassword(str) {
+        if(password) {
+            throw new Error('Password already set');
+        }
+        password = str;
+    }
+
+    function checkPassword(str) {
+        console.log(str === password);
+    }
+    return {
+        setPassword: setPassword,
+        checkPassword: checkPassword
+    }
 }
+
+const user = new User();
+user.setPassword('123456');
+user.checkPassword('123456'); // true
+user.checkPassword('123'); // false
+user.password; // undefined
+user.setPassword('123'); // Error
+user.checkPassword('123'); // false
+user.password; // undefined

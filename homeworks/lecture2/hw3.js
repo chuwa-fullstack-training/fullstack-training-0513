@@ -57,13 +57,35 @@ The + operator is used with a number, so NaN + 2 results in NaN.
 */
 
 console.log("0 || 1 = "+(0 || 1)); // 0 || 1 = 1
-
+/*
+Reason:
+The || operator returns the first truthy value or the last value if there are no truthy values.
+0 is falsy, so the output is 1.
+*/
 console.log("1 || 2 = "+(1 || 2)); // 1 || 2 = 1
-
+/*
+Reason:
+1 is truthy, so the output is 1.
+*/
 console.log("0 && 1 = "+(0 && 1)); // 0 && 1 = 0
-
+/*
+Reason:
+The && operator returns the last truthy value, and if there is a falsy value, it will short-circuit and return that value.
+0 is falsy, so the output is 0.
+*/
 console.log("1 && 2 = "+(1 && 2)); // 1 && 2 = 2
-
+/*
+Reason:
+Both 1 and 2 are truthy, so the output is 2.
+*/
 console.log(false == '0') // true
-
+/*
+Reason:
+The == operator performs type coercion, converting the string '0' to a boolean value.
+The boolean value of '0' is false, so false == false is true.
+*/
 console.log(false === '0') // false
+/*
+Reason:
+The === operator does not perform type coercion, so false is not equal to the string '0'.
+*/
