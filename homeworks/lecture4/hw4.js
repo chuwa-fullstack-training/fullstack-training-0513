@@ -12,4 +12,7 @@
  */
 const intersection = (nums1, nums2) => {
   // Your solution here
+  const set = new Set(nums1);
+  const set2 = new Set(nums2.filter(val => set.has(val)));
+  return [...set2];
 };
