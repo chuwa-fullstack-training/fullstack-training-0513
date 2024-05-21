@@ -8,6 +8,8 @@ function f() {
   }
   console.log(a);
 }
+// output: 7, because var a is a function scope variable.
+
 
 // 2. When executed, what value will be output?
 function f() {
@@ -16,6 +18,8 @@ function f() {
   }
   console.log(a);
 }
+//output: 5, because var a is a function scope variable.
+
 
 // 3. When executed, what value will be output?
 function f() {
@@ -23,6 +27,8 @@ function f() {
 }
 f();
 console.log(a);
+//output: 3, becasue there is not var/let/const before a, a become a global variable.
+
 
 // 4.
 var a = 5;
@@ -35,6 +41,8 @@ function second() {
 }
 first();
 second();
+//output: 6, a is global variable.
+
 
 // 5.
 var a = 5;
@@ -42,6 +50,8 @@ function f() {
   var a = 7;
   console.log(a);
 }
+//output: 7, console.log inside function f.
+
 
 // 6.
 var a = 1;
@@ -52,3 +62,4 @@ function b() {
 }
 b();
 console.log(a);
+//output: 1, although function a() {} is behide return, there's a hoisting in function b. Make a = 10 only assign 10 to the loval variable a, not the global a.
