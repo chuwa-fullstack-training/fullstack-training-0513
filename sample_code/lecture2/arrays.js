@@ -39,7 +39,6 @@ for (var i = 0; i < fruits.length; i++) {
   console.log(fruits[i]);
 }
 
-
 /**
  * Adding and removing elements
  */
@@ -72,3 +71,13 @@ console.log(fruits); // Output: ['pineapple', 'apple', 'orange', 'mango']
 // Adding elements at a specific position in the array
 fruits.splice(1, 0, 'cherry', 'kiwi');
 console.log(fruits); // Output: ['pineapple', 'cherry', 'kiwi', 'apple', 'orange', 'mango']
+
+// create a two dimensional array
+// incorrect way
+// let matrix = new Array(5).fill(new Array(5).fill(0));
+
+// correct way
+let matrix = new Array(5).fill().map(() => new Array(5).fill(0));
+
+// matrix[0][2] = 1;
+// console.log(matrix);
