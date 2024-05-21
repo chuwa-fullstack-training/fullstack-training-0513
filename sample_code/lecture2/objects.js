@@ -76,7 +76,8 @@ let student = {
   lastName: 'Zhang',
   // define getter for fullName
   get fullName() {
-    return `${this.firstName} ${this.lastName}`;
+    // return `${this.firstName} ${this.lastName}`;
+    return this.firstName + ' ' + this.lastName;
   },
   // define setter for fullName
   set fullName(value) {
@@ -94,12 +95,12 @@ console.log(student.fullName); // Outputs: Alex Chen
 console.log(student.firstName); // Outputs: Alex
 console.log(student.lastName); // Outputs: Chen
 
-// Object.defineProperty(student, 'getFullName', {
-//   value: function () {
-//     return this.firstName + ' ' + this.lastName;
-//   },
-//   writable: false
-// });
+Object.defineProperty(student, 'getFullName', {
+  value: function () {
+    return this.firstName + ' ' + this.lastName;
+  },
+  writable: false
+});
 
 // Object.defineProperty(student, 'setFullName', {
 //   value: function () {
