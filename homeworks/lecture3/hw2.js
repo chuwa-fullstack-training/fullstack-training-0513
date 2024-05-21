@@ -4,4 +4,14 @@
  */
 function sum() {
     // implement here
+    if (arguments.length === 2) {
+        return arguments[0] + arguments[1];
+    } else if (arguments.length === 1) {
+        let num1 = arguments[0];
+        return function(num2) {
+            return num1 + num2;
+        }
+    } else {
+        return "invalid input";
+    }
 }
