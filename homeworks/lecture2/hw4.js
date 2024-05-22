@@ -8,6 +8,8 @@ function f() {
   }
   console.log(a);
 }
+// 7
+// value changes to 7 inside the if block
 
 // 2. When executed, what value will be output?
 function f() {
@@ -16,6 +18,8 @@ function f() {
   }
   console.log(a);
 }
+// 5
+// var is function-scoped, a is accessible in function.
 
 // 3. When executed, what value will be output?
 function f() {
@@ -23,6 +27,8 @@ function f() {
 }
 f();
 console.log(a);
+// 3
+//no var, let, or const keyword before a, a is declared as a global variable
 
 // 4.
 var a = 5;
@@ -36,12 +42,16 @@ function second() {
 first();
 second();
 
+// 6
+// first() changes a to 6
+
 // 5.
 var a = 5;
 function f() {
   var a = 7;
   console.log(a);
 }
+// 7 a in f() has value 7
 
 // 6.
 var a = 1;
@@ -52,3 +62,6 @@ function b() {
 }
 b();
 console.log(a);
+
+// 1
+//a in function b is a local variable, not global variable a
