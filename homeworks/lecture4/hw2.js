@@ -15,3 +15,26 @@
  * const arr = [[0, 1], [2, 3], [4, [5, 6]]];
  * Expected output: [0, 1, 2, 3, 4, 5, 6]
  */
+
+function doubled(arr){
+    return arr.map(num => num*2)
+}
+console.log(doubled([1, 2, 3, 4])); // [2, 4, 6, 8]
+
+function even(arr){
+    return arr.filter(num => num % 2 === 0)
+}
+console.log(even([1, 2, 3, 4, 5, 6])); // [2, 4, 6]
+
+function reverse(str) {
+    return str.split('').reduce((accumulator, currentChar) => currentChar + accumulator, '')
+}
+console.log(reverse("Hello World"));
+
+function flatten(arr) {
+    return arr.reduce((accumulator, currentValue) => [...accumulator, ...(Array.isArray(currentValue) ? flatten(currentValue) : [currentValue])] , []);
+}
+const arr = [[0, 1], [2, 3], [4, 5]];
+const arr2 = [[0, 1], [2, 3], [4, [5, 6]]];
+console.log(flatten(arr));
+console.log(flatten(arr2));
