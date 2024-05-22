@@ -18,12 +18,41 @@
  * 1 <= nums[i] <= 100
  */
 function numIdenticalPairs(nums) {
-  // implement here
+  nums.sort();
+  let last = 0, res = 0;
+  for (let i = 0; i < nums.length; ++i) {
+    if (nums[i] != nums[last]) {
+      res += Math.floor(fac(i - last) / 2);
+      last = i;
+    }
+    
+  }
+  res += Math.floor(fac(nums.length - last) / 2);
+  return res;
+}
+
+function fac(i) {
+  let res = 1;
+  for (let x = 2; x <= i; ++x) {
+    res *= x;
+  }
+  return res;
 }
 
 /**
  * Given a string s, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
  */
 function removeVowels(s) {
-  // implement here
+  let news = [];
+  let vow = new Set(['a', 'e', 'i', 'o', 'u']);
+  for (let ele of s) {
+    if (!vow.has(ele)) {
+      news.push(ele);
+    }
+  }
+  return news.join("");
 }
+
+// test
+// console.log(numIdenticalPairs([1, 2, 3, 2, 1, 1, 3, 3]));
+// console.log(removeVowels("abcdefghij"));

@@ -12,5 +12,26 @@
  * user.password; // undefined
  */
 function User() {
-    // implement here
+    let pwd = "";
+    let setted = false;
+    this.setPassword = function(newpwd) {
+        if (setted) {
+            throw new Error;
+        }
+        setted = true;
+        pwd = newpwd;
+    }
+    this.checkPassword = function(pwdin) {
+        return pwd === pwdin;
+    }
 }
+
+// test
+// const user = new User();
+// user.setPassword('123456');
+// console.log(user.checkPassword('123456')); // true
+// console.log(user.checkPassword('123')); // false
+// console.log(user.password); // undefined
+// user.setPassword('123'); // Error
+// user.checkPassword('123'); // false
+// user.password; // undefined

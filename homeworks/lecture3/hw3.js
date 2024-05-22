@@ -1,5 +1,9 @@
 function counter() {
-    // implement here
+    let ct = 0;
+    return function (incr) {
+        if (incr !== undefined) { ct += incr; }
+        return ct;
+    }
 }
 
 let count = counter();
