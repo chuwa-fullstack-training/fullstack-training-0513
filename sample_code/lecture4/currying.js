@@ -33,6 +33,6 @@ const store = {
 };
 
 console.log(store.discount(10, 5));
-const tenPercentDiscount = curry(store.discount)(10);
+const tenPercentDiscount = curry(store.discount.bind(store))(10);
 console.log('original price:', store.price);
 console.log('after discount:', tenPercentDiscount(5));
