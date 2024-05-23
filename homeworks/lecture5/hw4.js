@@ -13,6 +13,11 @@ Promise.resolve(1)
     console.log(res);
   });
 
+// 1 2
+// 1 is caught by the first then, 2 is caught by the second then
+
+
+
 // // 2
 Promise.reject(1)
   .then(res => {
@@ -26,6 +31,8 @@ Promise.reject(1)
   .then(res => {
     console.log(res);
   });
+// 1 3
+// 1 is caught by 'catch', 3 is caught by the second then
 
 //3
 function runAsync(x) {
@@ -45,3 +52,10 @@ function runReject(x) {
 Promise.all([runAsync(1), runReject(4), runAsync(3), runReject(2)])
   .then(res => console.log(res))
   .catch(err => console.log(err));
+// Error: 2
+// runAsync(1) resolve after 1s
+// runReject(4) reject after 4s
+// runAsync(3) resolve after 3s
+// runReject(2) reject after 2s
+
+//Promise.all reject immediately after 2s and return with Error: 2
