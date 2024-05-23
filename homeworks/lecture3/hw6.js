@@ -19,6 +19,17 @@
  */
 function numIdenticalPairs(nums) {
   // implement here
+  let res = 0;
+  let count = {};
+  for (let num of nums) {
+      if (count[num]) {
+          res += count[num];
+          count[num] += 1;
+      } else {
+          count[num] = 1;
+      }
+  }
+  return res;
 }
 
 /**
@@ -26,4 +37,25 @@ function numIdenticalPairs(nums) {
  */
 function removeVowels(s) {
   // implement here
+  let set = new Set(['a', 'e', 'i', 'o', 'u']);
+
+  // mehtod 1: map
+  let strArr = s.split("").map((val) => {
+    return set.has(val) ? "" : val;
+  })
+  return strArr.join("");
+
+  // // method 2: filter
+  // let strArr = s.split("").filter((char)=>{
+  //   return !set.has(char);
+  // })
+  // return strArr.join("");
+
+  // // method 3: reduce
+  // let res = s.split("").reduce((accumulator, curChar) => {
+  //   curChar = set.has(curChar) ? "" : curChar;
+  //   return accumulator + curChar;
+  // }, "");
+
+  // return res;
 }

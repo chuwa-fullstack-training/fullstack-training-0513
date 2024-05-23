@@ -13,4 +13,18 @@
  */
 function User() {
     // implement here
+    let password = '';
+
+    this.setPassword = function (newPassword){
+        if (password === ''){
+            password = newPassword;
+        } else {
+            // throw new Error('Has already set password!');
+            console.log("Has already set password!");
+        }
+    }
+
+    this.checkPassword = function (input) {
+        return password === input;
+    }
 }
