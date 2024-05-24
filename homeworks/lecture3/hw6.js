@@ -19,6 +19,17 @@
  */
 function numIdenticalPairs(nums) {
   // implement here
+  let res = 0;
+  let mp = {};
+  for (let num of nums) {
+    if (mp[num]) {
+      res += mp[num];
+      mp[num] += 1;
+    } else {
+      mp[num] = 1;
+    }
+  }
+  return res;
 }
 
 /**
@@ -26,4 +37,11 @@ function numIdenticalPairs(nums) {
  */
 function removeVowels(s) {
   // implement here
+  const vowels = ["a", "e", "i", "o", "u"];
+  let arr = [];
+
+  for (let i = 0; i < s.length; i++) {
+    if (!vowels.includes(s[i])) arr.push(s[i]);
+  }
+  return arr.join("");
 }
