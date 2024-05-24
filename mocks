@@ -1,0 +1,22 @@
+const getCart = () => {
+    console.log("getCart")
+    return Promise.resolve("getCart/200")
+}
+
+const getTotalSummary = () => {
+    console.log("getTotalSummary")
+    return Promise.resolve("getTotalSummary/200")
+}
+
+const getPromotionDetails = () => {
+    /* Implement - delay 5 secs */
+    return setTimeout(() => console.log(1), 5000)
+}
+
+const Render = () => {
+    getCart()
+        .then(getPromotionDetails)
+        .then(getTotalSummary)
+}
+
+Render()
