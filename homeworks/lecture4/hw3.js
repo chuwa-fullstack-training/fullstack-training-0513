@@ -8,3 +8,24 @@
  */
 
 // your code here
+var Singleton = (function () {
+    var instance;
+    function Singleton() {
+        if (instance) {
+            return instance;
+        }
+        instance = this;
+    };
+    return Singleton;
+}     
+)();
+
+class Singleton {
+    static instance;
+    constructor() {
+        if (Singleton.instance) {
+            return Singleton.instance;
+        }
+        Singleton.instance = this;
+    }
+}
