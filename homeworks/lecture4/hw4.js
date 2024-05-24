@@ -12,14 +12,9 @@
  */
 const intersection = (nums1, nums2) => {
   // Your solution here
-    const set1 = new Set(nums1)
-    const interSet = new Set()
+    const inter = new Set(nums1.filter(num => nums2.includes(num)))
 
-    nums2.forEach(num => {
-        if (set1.has(num)) interSet.add(num)
-    })
-
-    return [...interSet]
+    return [...inter]
 };
 console.log(intersection([1, 2, 2, 1], [2, 2]));
 console.log(intersection([4, 9, 5], [9, 4, 9, 8, 4]));
