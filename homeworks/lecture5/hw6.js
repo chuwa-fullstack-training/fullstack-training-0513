@@ -11,14 +11,14 @@ function sequencePromise(urls) {
     // if you use `fetch`, you have to use browser console to test this homework
     return getJSON(url).then(response => results.push(response));
   }
-  // implement your code here
+  urls.forEach((url) => {  fetchOne(url); });
 
   return results;
 }
 
 // option 1
 function getJSON(url) {
-  // this is from hw5
+  return fetch(url).then(res => { return res.json() });
 }
 
 // option 2
@@ -32,3 +32,5 @@ const urls = [
   'https://api.github.com/search/repositories?q=react',
   'https://api.github.com/search/repositories?q=nodejs'
 ];
+
+console.log(sequencePromise(urls))

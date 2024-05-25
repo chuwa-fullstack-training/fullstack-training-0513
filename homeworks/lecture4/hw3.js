@@ -18,15 +18,15 @@ function Singleton() {
     this.name = "XX";
 }
 // ES6
-// class Singleton {
-//     constructor() {
-//         if (Singleton._instance) {
-//             return Singleton._instance;
-//         }
-//         Singleton._instance = this;
-//         this.name = "xx";
-//     }
-// }
+class Singleton {
+    constructor() {
+        if (Singleton._instance) {
+            return Singleton._instance;
+        }
+        Singleton._instance = this;
+        this.name = "xx";
+    }
+}
 
 const instance1 = new Singleton();
 const instance2 = new Singleton();

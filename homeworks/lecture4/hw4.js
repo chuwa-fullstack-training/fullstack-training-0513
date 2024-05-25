@@ -11,5 +11,18 @@
  *
  */
 const intersection = (nums1, nums2) => {
-  // Your solution here
+  let s2 = new Set(nums2);
+  let res = [];
+  for (let ele of nums1) {
+    if (s2.has(ele)) {
+      res.push(ele);
+      s2.delete(ele);
+    }
+  }
+  return res;
 };
+
+// console.log(intersection([1, 2, 2, 1], [2, 2]));
+// console.log(intersection([2, 2], [1, 2, 2, 1]));
+// console.log(intersection([4,9,5], [9,4,9,8,4]));
+// console.log(intersection([9,4,9,8,4], [4,9,5]));

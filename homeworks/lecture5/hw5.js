@@ -38,7 +38,7 @@ const https = require('https');
 // }
 
 function getJSON(url) {
-  // implement your code here
+  return fetch(url).then(res => { return res.json() });
 }
 
 getJSON('https://api.github.com/search/repositories?q=javascript')
