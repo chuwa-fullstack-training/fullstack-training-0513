@@ -18,10 +18,73 @@ Triangle.prototype.constructor = Triangle;
 
 // your code goes here
 // 1. implement a method getPerimeter for Triangle class
+Triangle.prototype.getPerimeter = function () {
+    return this.a + this.b + this.c;
+}
+
 // 2. implement a method getArea for Triangle class
+Triangle.prototype.getArea = function () {
+    const p = this.getPerimeter() / 2;
+    return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+}
 
 // 3. implement a new class Circle. this class should inherit from Shape class, and have a radius property.
+function Circle(radius) {
+    Shape.call(this);
+    this.type = "circle";
+    this.radius = radius;
+}
+// Circle.prototype = Object.create(Shape.prototype);
+Circle.prototype = new Shape();
+Circle.prototype.constructor = Circle;
+
 // 4. implement a method area for Circle class
+Circle.prototype.getArea = function () {
+    return Math.PI * this.radius * this.radius;
+}
+
 // 5. implement a method circumference for Circle class
+Circle.prototype.getCircumference = function () {
+    return 2 * Math.PI * this.radius;
+}
 
 // 6. change all code above to use ES6 class syntax
+class Shape_{
+    constructor() {
+        this.type = "shape";
+    }
+    getType_() {
+        return this.type;
+    }
+}
+
+class Triangle_ extends Shape_{
+    constructor(a, b, c) {
+        super();
+        this.type = "triangle";
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+    getPerimeter_ () {
+        return this.a + this.b + this.c;
+    }
+    getArea_ (){
+        const p = this.getPerimeter() / 2;
+        return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    }
+}
+
+class Circle_ extends Shape_ {
+    constructor(radius) {
+        super();
+        this.type = "circle";
+        this.radius = radius;
+    }
+    getArea_() {
+        return Math.PI * this.radius * this.radius;
+    }
+    getCircumference_() {
+        return 2 * Math.PI * this.radius;
+    }
+}

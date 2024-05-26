@@ -12,5 +12,16 @@
  * user.password; // undefined
  */
 function User() {
-    // implement here
+    let password = null;
+    this.setPassword = function(newPassword) {
+        if (password === null) {
+            password = newPassword;
+        }
+        else{
+            throw new Error("Error");
+        }
+    }
+    this.checkPassword = function(num){
+        return password === num;
+    }
 }
