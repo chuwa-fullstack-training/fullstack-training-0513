@@ -4,21 +4,57 @@
  * @param {string[]} urls - an array of urls
  * @returns {any[]} - an array of responses
  */
+const https = require('https');
 function sequencePromise(urls) {
   const results = [];
+  let start = Promise.resolve();
   function fetchOne(url) {
     // for `getJSON` function you can choose either from the implementation of hw5 or `fetch` version provided by browser
     // if you use `fetch`, you have to use browser console to test this homework
     return getJSON(url).then(response => results.push(response));
   }
-  // implement your code here
+  //implement your code here
+  for (let url of urls) {
+    start = start
+    .then(() => fetchOne(url))
+    .catch(err => console.log(err));
+  }
 
-  return results;
+  return start.then(() => results).catch(err => console.log(err));
 }
 
 // option 1
 function getJSON(url) {
   // this is from hw5
+  return new Promise((resolve, reject) => {
+    const options = {
+      headers: {
+        'User-Agent': 'request'
+      }
+    };
+    https.get(url, options, response => {
+      if (response.statusCode !== 200) {
+        reject(new Error('Did not get an OK from the server. Code: ${response.statusCode'));
+        response.resume();
+        return;
+      }
+      let data = '';
+      response.on('data', chunk => {
+        data += chunk;
+      });
+
+      response.on('end', () => {
+        try {
+          const json = JSON.parse(data);
+          resolve(json);
+        } catch (e) {
+          reject(new Error(`Error parsing JSON: ${e.message}`))
+        }
+      });
+    }).on('error', err => {
+      reject(new Error('Encountered an error Encountered an error trying to make a request: ${err.message}'));
+    });
+  });
 }
 
 // option 2
@@ -32,3 +68,12 @@ const urls = [
   'https://api.github.com/search/repositories?q=react',
   'https://api.github.com/search/repositories?q=nodejs'
 ];
+
+sequencePromise(urls)
+.then(results => {
+  results.forEach((_, index) => {
+    console.log(`Response for URL ${index + 1}`);
+  })
+})
+.catch(error => console.log(error));
+
