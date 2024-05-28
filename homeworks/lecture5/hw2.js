@@ -9,6 +9,17 @@
  */
 function reverseWords(str) {
   // your code here
+  let res = '', word = '';
+  for (let s of str) {
+    if (s === ' ') {
+      res = s + word + res;
+      word = '';
+    } else {
+      word += s;
+    }
+  }
+  res = word + res;
+  return res;
 }
 
 const input = 'the sky is blue'.split(''); // ['t', 'h', 'e', ' ', 's', 'k', 'y', ' ', 'i', 's', ' ', 'b', 'l', 'u', 'e']
