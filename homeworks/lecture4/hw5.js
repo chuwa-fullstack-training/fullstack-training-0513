@@ -7,5 +7,27 @@
 // data.child = data;
 
 const cloneDeepWithLoop = (obj) => {
-    // Implement the function here
+    const map = new Map();
+    const cloneDeep = (data) => {
+        if (typeof  data!== 'object' || data === null) {
+            return data;
+        }
+
+        if (map.has(data)) {
+            return map.get(data);
+        }
+
+        const clone = Array.isArray(data) ? [] : {};
+
+        map.set(data, clone);
+
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                clone[key] = cloneDeep(data[key]);
+            }
+        }
+        return clone;
+    };
+
+    return cloneDeep(obj);
 }
