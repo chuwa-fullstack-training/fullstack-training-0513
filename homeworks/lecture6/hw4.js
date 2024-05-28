@@ -6,4 +6,13 @@
  */
 function format(num) {
   // your code here
+    const str = num.toString();
+    let [integer, decimal] = str.split('.')
+
+    integer = integer.replace(/(?=(\d{3})+(?!\d))/g, ',');
+    return decimal? `${integer}.${decimal}` : integer;
+
 }
+
+console.log(format(12345678));
+console.log(format(1234.56));
