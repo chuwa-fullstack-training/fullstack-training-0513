@@ -14,8 +14,15 @@
  * @returns {function}
  */
 function debounce(func, delay) {
-  // your code here
+  let timerId;
+  return function (...args) {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
 }
+
 
 /**
  * implement throttle function
@@ -33,5 +40,22 @@ function debounce(func, delay) {
  * @returns {function}
  */
 function throttle(func, delay) {
-  // your code here
+  let lastFunc;
+  let lastRan;
+  return function (...args) {
+    const context = this;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function () {
+        if ((Date.now() - lastRan) >= delay) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, delay - (Date.now() - lastRan));
+    }
+  };
 }
+

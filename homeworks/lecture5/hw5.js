@@ -37,10 +37,57 @@ const https = require('https');
 //   });
 // }
 
+// function getJSON(url) {
+//   // implement your code here
+// }
+
+// getJSON('https://api.github.com/search/repositories?q=javascript')
+//   .then(response => console.log(response.items.length)) // output: 30
+//   .catch(err => console.log(err)); // if you remove options from https.get parameters, you might see an error
+
+
+
+
+const https = require('https');
+
 function getJSON(url) {
-  // implement your code here
+    return new Promise((resolve, reject) => {
+        const options = {
+            headers: {
+                'User-Agent': 'request'
+            }
+        };
+
+        const request = https.get(url, options, response => {
+            if (response.statusCode !== 200) {
+                reject(new Error(`Did not get an OK from the server. Code: ${response.statusCode}`));
+                return response.resume(); // Consume response data to free up memory
+            }
+
+            let data = '';
+            response.on('data', chunk => {
+                data += chunk;
+            });
+
+            response.on('end', () => {
+                try {
+                    const parsedData = JSON.parse(data);
+                    resolve(parsedData); // Resolve the promise with the parsed data
+                } catch (e) {
+                    reject(new Error(`Error parsing JSON: ${e.message}`)); // Reject the promise if error occurs
+                }
+            });
+        });
+
+        request.on('error', err => {
+            reject(new Error(`Encountered an error trying to make a request: ${err.message}`));
+        });
+    });
 }
 
+// 使用示例
 getJSON('https://api.github.com/search/repositories?q=javascript')
-  .then(response => console.log(response.items.length)) // output: 30
-  .catch(err => console.log(err)); // if you remove options from https.get parameters, you might see an error
+    .then(response => {
+        console.log(response.items.length); // 此处假设API返回了预期的数据结构
+    })
+    .catch(err => console.log(err));

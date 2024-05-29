@@ -5,5 +5,10 @@
  * @param {number} num
  */
 function format(num) {
-  // your code here
+  const parts = num.toString().split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return parts.join('.');
 }
+console.log(format(12345678));  
+console.log(format(1234.56));    
+
