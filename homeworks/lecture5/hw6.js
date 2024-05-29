@@ -12,7 +12,7 @@ function sequencePromise(urls) {
     return getJSON(url).then(response => results.push(response));
   }
   // implement your code here
-
+  urls.reduce((acc, url) => acc.then(() => fetchOne(url)), Promise.resolve());
   return results;
 }
 

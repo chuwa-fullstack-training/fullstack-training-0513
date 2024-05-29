@@ -25,10 +25,14 @@ const persons: Person[] = [
   },
 ];
 
+function isAdmin(person: Person): person is Admin {
+  return (person as Admin).role !== undefined;
+}
+
 // fix the error showing in the following code:
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if (isAdmin(person)) {
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;

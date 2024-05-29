@@ -6,4 +6,15 @@
  */
 function format(num) {
   // your code here
+  let str = num.toString();
+  let [int, dec] = str.split('.');
+  let res = '';
+  let len = int.length;
+  for (let i = 0; i < len; i++) {
+    if (i % 3 === 0 && i !== 0) {
+      res = ',' + res;
+    }
+    res = int[len - 1 - i] + res;
+  }
+  return dec ? res + '.' + dec : res;
 }
