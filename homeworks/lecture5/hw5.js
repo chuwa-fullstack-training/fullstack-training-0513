@@ -61,7 +61,7 @@ function getJSON(url) {
         const request = https.get(url, options, response => {
             if (response.statusCode !== 200) {
                 reject(new Error(`Did not get an OK from the server. Code: ${response.statusCode}`));
-                return response.resume(); // Consume response data to free up memory
+                return response.resume(); 
             }
 
             let data = '';
@@ -72,9 +72,9 @@ function getJSON(url) {
             response.on('end', () => {
                 try {
                     const parsedData = JSON.parse(data);
-                    resolve(parsedData); // Resolve the promise with the parsed data
+                    resolve(parsedData); 
                 } catch (e) {
-                    reject(new Error(`Error parsing JSON: ${e.message}`)); // Reject the promise if error occurs
+                    reject(new Error(`Error parsing JSON: ${e.message}`)); 
                 }
             });
         });
@@ -85,9 +85,9 @@ function getJSON(url) {
     });
 }
 
-// 使用示例
+
 getJSON('https://api.github.com/search/repositories?q=javascript')
     .then(response => {
-        console.log(response.items.length); // 此处假设API返回了预期的数据结构
+        console.log(response.items.length); 
     })
     .catch(err => console.log(err));
