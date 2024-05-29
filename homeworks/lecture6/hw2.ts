@@ -26,12 +26,28 @@ const persons: Person[] = [
 ];
 
 // fix the error showing in the following code:
+// function logPerson(person: Person) {
+//   let additionalInformation: string;
+//   if (person.role) {
+//     additionalInformation = person.role;
+//   } else {
+//     additionalInformation = person.occupation;
+//   }
+//   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
+// }
+
+// persons.forEach(logPerson);
+
+// person is a union type of User and Admin, so it might not have the property role
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
-    additionalInformation = person.role;
+  // use in operator to check if the property exists in the prototype chain
+  // or use .hasOwnProperty()
+  // if ('role' in person) {
+  if (person.hasOwnProperty('role')) {
+    additionalInformation = (person as Admin).role;
   } else {
-    additionalInformation = person.occupation;
+    additionalInformation = (person as User).occupation;
   }
   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
 }

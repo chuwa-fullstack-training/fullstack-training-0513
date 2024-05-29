@@ -6,4 +6,14 @@
  */
 function format(num) {
   // your code here
+  const numStr = num.toString();
+  const [integer, decimal] = numStr.split('.');
+  const res = Array.from(integer).reverse().reduce((acc, cur, index) => {
+    if (index % 3 === 0 && index !== 0) {
+      return cur + ',' + acc;
+    }
+    return cur + acc;
+  }, '');
+  return decimal ? res + '.' + decimal : res;
 }
+console.log(format(12345678)); // 12,345,678
