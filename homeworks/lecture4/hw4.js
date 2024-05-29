@@ -10,6 +10,19 @@
  * Output: [9,4]
  *
  */
+let nums1 = [1,2,2,1];
+let nums2 = [2, 2];
 const intersection = (nums1, nums2) => {
   // Your solution here
+  let set1 = new Set(nums1);
+  let res = new Set();
+  nums2.forEach((val) => {
+    if (set1.has(val)) {
+      res.add(val);
+    }
+  })
+
+  return Array.from(res);
 };
+
+console.log(intersection(nums1, nums2));
