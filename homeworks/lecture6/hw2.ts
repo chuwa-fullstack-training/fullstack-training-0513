@@ -26,14 +26,27 @@ const persons: Person[] = [
 ];
 
 // fix the error showing in the following code:
+// original code
+// function logPerson(person: Person) {
+//   let additionalInformation: string;
+//   if (person.role) {
+//     additionalInformation = person.role;
+//   } else {
+//     additionalInformation = person.occupation;
+//   }
+//   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
+// }
+
+// fixed code
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ("role" in person) {
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;
   }
   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
 }
+
 
 persons.forEach(logPerson);
