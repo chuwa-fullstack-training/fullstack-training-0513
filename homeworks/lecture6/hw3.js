@@ -13,9 +13,25 @@
  * @param {number} delay
  * @returns {function}
  */
+/*
+The function returns a new function that can warp the original func
+*/
 function debounce(func, delay) {
   // your code here
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {func.apply(this, args);}, delay);
+  }
 }
+
+const test = (message) => console.log(message);
+const testFn = debounce(test, 1000);
+setTimeout(() => testFn('hello yuxuan'), 3000);
+setTimeout(() => testFn('hello tippy'), 3500);
+// setTimeout(() => testFn('hello Alex'), 4502); //This don't work, timer accuracy?
+setTimeout(() => testFn('hello Aaron'), 6000);
+
 
 /**
  * implement throttle function
@@ -34,4 +50,17 @@ function debounce(func, delay) {
  */
 function throttle(func, delay) {
   // your code here
+  let timer = 0;
+  return function(...args) {
+    const now = Date.now();
+    if (now - timer >= delay) {
+      timer = now;
+      func.apply(this,args);
+    }
+  };
 }
+const testFn1 = throttle(() => test("Hi"), 5000);
+setTimeout(() => testFn1(), 500);
+setTimeout(() => testFn1(), 1000);
+setTimeout(() => testFn1(),5050);
+testFn1();

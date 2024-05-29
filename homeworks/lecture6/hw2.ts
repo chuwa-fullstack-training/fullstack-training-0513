@@ -26,9 +26,12 @@ const persons: Person[] = [
 ];
 
 // fix the error showing in the following code:
+// Use 'in' operator to check whether the `person` object has `role` attribute
+// If yes, then the type of the `person` is admin (type guards), otherwise typescipt
+//cannot determine whether person has the `role` attribute or not. 
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ('role' in person) {
     additionalInformation = person.role;
   } else {
     additionalInformation = person.occupation;
