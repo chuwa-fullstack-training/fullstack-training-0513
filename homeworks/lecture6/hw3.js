@@ -14,7 +14,14 @@
  * @returns {function}
  */
 function debounce(func, delay) {
-  // your code here
+   let tmout_mp = new Map();
+    return function() {
+      if (tmout_mp.has(func)) {
+        clearTimeout(tmout_mp.get(func));
+      }
+      
+      tmout_mp.set(func, setTimeout(func, delay));
+    }
 }
 
 /**
@@ -33,5 +40,18 @@ function debounce(func, delay) {
  * @returns {function}
  */
 function throttle(func, delay) {
-  // your code here
+  let tmap = new Set();
+  function decorated_func() {
+    func();
+    tmap.delete(func);
+  }
+  return function(){
+    if (tmap.has(func)) {
+      return;
+    }
+    tmap.add(func);
+    setTimeout(decorated_func, delay);
+  }
 }
+
+
