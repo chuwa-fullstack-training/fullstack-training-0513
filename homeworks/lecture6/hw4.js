@@ -5,5 +5,9 @@
  * @param {number} num
  */
 function format(num) {
-  // your code here
+  const numStr = num.toString();
+  const [integerPart, decimalPart] = numStr.split('.');
+  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  return decimalPart ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
 }
