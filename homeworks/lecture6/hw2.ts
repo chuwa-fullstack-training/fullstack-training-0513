@@ -26,11 +26,12 @@ const persons: Person[] = [
 ];
 
 // fix the error showing in the following code:
+// add type guards
 function logPerson(person: Person) {
   let additionalInformation: string;
-  if (person.role) {
+  if ("role" in person && typeof person.role === "string") {
     additionalInformation = person.role;
-  } else {
+  } else if ("occupation" in person && typeof person.occupation === "string"){
     additionalInformation = person.occupation;
   }
   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
