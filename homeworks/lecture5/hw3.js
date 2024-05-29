@@ -9,6 +9,10 @@ new Promise((resolve, reject) => {
   console.log('e');
   reject('f');
 }).then(result => console.log(result));
+//a c e d b, becasue it will do the main process first, so a and c first then e
+// then mircotasks -> when promise fullfilled -> d
+// then marcotasks -> setTimeout -> b
+
 
 // 2
 const fn = () =>
@@ -22,3 +26,8 @@ fn().then(res => {
 });
 
 console.log('start');
+// 1 start success
+// when fn is called, 1
+// put resolve('success') to mircotasks
+// start
+// then the call stack is empty, do mircotasks -> success

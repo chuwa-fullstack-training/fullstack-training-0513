@@ -11,15 +11,16 @@ function sequencePromise(urls) {
     // if you use `fetch`, you have to use browser console to test this homework
     return getJSON(url).then(response => results.push(response));
   }
-  // implement your code here
+  return urls.reduce((promise, url) => {
+    return promise.then(() => fetchOne(url));
+  }, Promise.resolve()).then(() => results);
 
-  return results;
 }
 
 // option 1
-function getJSON(url) {
-  // this is from hw5
-}
+// function getJSON(url) {
+//   // this is from hw5
+// }
 
 // option 2
 // function getJSON(url) {
