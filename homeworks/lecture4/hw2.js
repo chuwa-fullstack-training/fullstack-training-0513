@@ -15,3 +15,12 @@ const newArr2 = string.split("").reduce((pre, cur) => cur + pre, "");
  * const arr = [[0, 1], [2, 3], [4, [5, 6]]];
  * Expected output: [0, 1, 2, 3, 4, 5, 6]
  */
+const flatten = (arr) => {
+  return arr.reduce((acc, val) => {
+    if (Array.isArray(val)) {
+      return acc.concat(flatten(val));
+    } else {
+      return acc.concat(val);
+    }
+  }, []);
+};
