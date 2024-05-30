@@ -15,8 +15,16 @@
  */
 function debounce(func, delay) {
   // your code here
+  let timer;
+  return (...args)=>{
+    clearTimeout(timer);
+    timer = setTimeout(()=>{func.apply(this, args)}, delay);
+  }
 }
-
+const printHello = () => console.log('hello')
+const debouncedFn = debounce(printHello, 1000)
+debouncedFn()
+debouncedFn()
 /**
  * implement throttle function
  * explain: `func` will be called every `delay` ms. if `func` is called again before `delay` ms, the call will be ignored
@@ -34,4 +42,19 @@ function debounce(func, delay) {
  */
 function throttle(func, delay) {
   // your code here
+  let called = false;
+  return (...args)=>{
+    if (!called){
+      func.apply(this,args);
+      called = true;
+      setTimeout(() => {
+        called = false;
+      }, delay);
+    }
+  }
+
 }
+
+const throttledFn = throttle(printHello, 1000)
+throttledFn()
+throttledFn() // ignored
