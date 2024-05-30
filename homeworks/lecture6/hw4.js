@@ -6,8 +6,17 @@
  */
 function format(num) {
   const numStr = num.toString();
-  const [integerPart, decimalPart] = numStr.split('.');
-  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const [integer, deciaml] = numStr.split('.');
+  
+  if (integer.length <= 3){
+    return num
+  }
 
-  return decimalPart ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
+  let reversedInts = integer.split('').reverse().join('');
+  let splitInts = reversedInts.match(/[\s\S]{1,3}/g);
+  splitInts = splitInts.map(splitInt => splitInt.split('').reverse().join('')).reverse();
+  let result = splitInts.join(',');
+
+  return decimal ? `${result}.${deciaml}` : result;
 }
+ 

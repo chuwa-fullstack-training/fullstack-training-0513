@@ -4,17 +4,19 @@ type User = {
   type: string;
 };
 
-function makeCustomer<T extends User>(u: T): T {
+function makeCustomer<T extends User>(u: T): Pick<User, "id" | "type"> {
   return {
     id: u.id,  
     type: "customer",
   };
 }
-// change line 9: id: u.id, to use spread operator ...u,
+// change a return type
 
 // 2. fix the following code
 // requirement: the function should accept either two strings or two numbers at the same time,
 // so if parameters are one string and one number, it should throw an error
+function f(a: string, b: string): string;
+function f(a: number, b: number): number;
 function f(a: string | number, b: string | number) {
   if (typeof a === "string" && typeof b === "string") {
     return `${a} : ${b}`;
@@ -24,3 +26,4 @@ function f(a: string | number, b: string | number) {
     throw new Error("one string and one number");
   }
 }
+D//efine two overloads for this, and add type guard

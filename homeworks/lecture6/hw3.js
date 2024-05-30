@@ -14,15 +14,13 @@
  * @returns {function}
  */
 function debounce(func, delay) {
-  let timer;
-  return function(...args) {
-    if (timer) {
-      clearTimeout(timer);
-    }
+   let timer;
+   return function(...args){
+    clearTimeout(timer);
     timer = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  };
+      func(...args);
+    }, delay)
+   };
 }
 
 /**
@@ -42,11 +40,11 @@ function debounce(func, delay) {
  */
 function throttle(func, delay) {
   let lastCall = 0;
-  return function(...args) {
+  return function(...args){
     const now = new Date().getTime();
-    if (now - lastCall >= delay) {
+    if (now - lastCall >= delay){
       lastCall = now;
-      func.apply(this, args);
+      func(...args);
     }
   };
 }

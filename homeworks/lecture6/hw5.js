@@ -19,13 +19,6 @@ function print() {
 const nums = [3, 1, 6, 9, 2];
 
 function printList() {
-  // your code here
-}
-
-// 2. traffic light
-// output: red -> green -> yellow -> red -> ...
-// the delay time is up to you, but the order has to be correct
-function trafficLight() {
   function delayPrint(number, delay) {
     return new Promise(resolve => {
       setTimeout(() => {
@@ -38,4 +31,35 @@ function trafficLight() {
   nums.reduce((promise, num) => {
     return promise.then(() => delayPrint(num, 1000));
   }, Promise.resolve());
+}
+
+// 2. traffic light
+// output: red -> green -> yellow -> red -> ...
+// the delay time is up to you, but the order has to be correct
+function trafficLight() {
+  const lights = ['red', 'green', 'yellow'];
+  const delays = {
+    red: 1000,
+    green: 1000,
+    yellow: 1000,
+  };
+
+  function delayLight(color) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        console.log(color);
+        resolve();
+      }, delays[color]);
+    });
+  }
+
+  async function cycleLights() {
+    while (true) {
+      for (const light of lights) {
+        await delayLight(light);
+      }
+    }
+  }
+
+  cycleLights();
 }
