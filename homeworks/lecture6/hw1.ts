@@ -1,8 +1,8 @@
 // 1. why there would be error in the following code? and how to fix it?
-type User = {
-  id: number;
-  type: string;
-};
+// type User = {
+//   id: number;
+//   type: string;
+// };
 
 function makeCustomer<T extends User>(u: T): T {
   return {

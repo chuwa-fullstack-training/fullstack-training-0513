@@ -35,7 +35,7 @@ function logPerson(person: Person) {
   if (isAdmin(person)) {
     additionalInformation = person.role;
   } else {
-    additionalInformation = person.occupation;
+    additionalInformation = (person as User).occupation;
   }
   console.log(` - ${person.name}, ${person.age}, ${additionalInformation}`);
 }
