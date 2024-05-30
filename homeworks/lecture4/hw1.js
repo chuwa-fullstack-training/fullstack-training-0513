@@ -6,23 +6,48 @@
 // <html><head><title>My Title</title></head></html - true
 
 function checkValidHTML(html) {
-    const tagRegex = ("<([A-Z][A-Z0-9]*)\b[^>]*>.*?</\1>");
-    const stack = [];
-
-    let match;
-    while ((match = tagRegex.exec(html)) !== null) {
-        const tag = match[1];
-        if (tag.startsWith("/")) {
-            const openTag = stack.pop();
-            if (!openTag || openTag !== tag.substring(1)) {
+    let i = 0;
+    html =  html.replace(/\s/g, "")
+    let intag = false, lastpos = 0, closing = false;
+    let stack = [];
+    while (i < html.length) {
+        if (html[i] === "<") {
+            intag = true;
+            lastpos = i + 1;
+        } else if (html[i] === "/") {
+            if (intag) { 
+                closing = true;
+                lastpos = i + 1; 
+            }
+        } else if (html[i] === ">") {
+            if (!closing) { stack.push(html.substring(lastpos, i)); }
+            else {
+                let clo = html.substring(lastpos, i);
+                if (stack.length === 0 || stack[stack.length - 1] !== clo) {
+                    return false;
+                }
+                stack.pop();
+            }
+            intag = false;
+            closing = false;
+        }
+        ++i; 
+    }
+    if (intag) {
+        if (!closing) { stack.push(html.substring(lastpos, html.length)); }
+        else {
+            let clo = html.substring(lastpos, html.length);
+            if (stack.length === 0 || stack[stack.length - 1] !== clo) {
                 return false;
             }
-        } else {
-            stack.push(tag);
+            stack.pop();
         }
+        intag = false;
+        closing = false;
     }
-
     return stack.length === 0;
 }
-console.log(checkValidHTML("<html><head><title>My Title</title></head></head></html>"));
+
 console.log(checkValidHTML("<html><head><title>My Title</title></head></html>"));
+console.log(checkValidHTML("<html><head><title>My Title</title></head></head></html>"));
+console.log(checkValidHTML("<html><head><title>My Title</title></head></html"));
