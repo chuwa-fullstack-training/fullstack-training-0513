@@ -1,5 +1,10 @@
 function counter() {
-    // implement here
+    var rst = 0;
+    return function add(number){
+        if(!number)return rst;
+        rst += number;
+        return rst;
+    }
 }
 
 let count = counter();

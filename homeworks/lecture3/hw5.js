@@ -13,4 +13,23 @@
  */
 function User() {
     // implement here
+    let password;
+
+    function createPassword(s) {
+        if (this.password) {
+            console.log("Error");
+        }
+        else {
+            this.password = s;
+        }
+    }
+
+    function verifyPassword(s) {
+        return s === this.password;
+    }
+
+    return {
+        setPassword: createPassword,
+        checkPassword: verifyPassword
+    }
 }
