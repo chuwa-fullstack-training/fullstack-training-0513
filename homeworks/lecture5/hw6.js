@@ -4,21 +4,59 @@
  * @param {string[]} urls - an array of urls
  * @returns {any[]} - an array of responses
  */
-function sequencePromise(urls) {
+
+const https = require("https");
+
+async function sequencePromise(urls) {
   const results = [];
   function fetchOne(url) {
     // for `getJSON` function you can choose either from the implementation of hw5 or `fetch` version provided by browser
     // if you use `fetch`, you have to use browser console to test this homework
-    return getJSON(url).then(response => results.push(response));
+    return getJSON(url).then((response) => results.push(response));
   }
   // implement your code here
-
-  return results;
+  const promise = urls.map((url) => fetchOne(url));
+  console.log(promise);
+  return Promise.all(promise).then(() => results);
 }
 
 // option 1
 function getJSON(url) {
   // this is from hw5
+  // implement your code here
+  return new Promise((resolve, reject) => {
+    const options = {
+      headers: {
+        "User-Agent": "request",
+      },
+    };
+
+    const request = https.get(url, options, (response) => {
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        reject(new Error(`Status Code: ${response.statusCode}`));
+        response.resume(); // Consume response data to free up memory
+        return;
+      }
+
+      let data = "";
+      response.on("data", (chunk) => {
+        data += chunk;
+      });
+
+      response.on("end", () => {
+        try {
+          const parsedData = JSON.parse(data);
+          resolve(parsedData);
+        } catch (e) {
+          reject(new Error(`Error parsing JSON: ${e.message}`));
+        }
+      });
+    });
+
+    request.on("error", (err) => {
+      reject(new Error(`Request error: ${err.message}`));
+    });
+  });
 }
 
 // option 2
@@ -28,7 +66,13 @@ function getJSON(url) {
 
 // test your code
 const urls = [
-  'https://api.github.com/search/repositories?q=javascript',
-  'https://api.github.com/search/repositories?q=react',
-  'https://api.github.com/search/repositories?q=nodejs'
+  "https://api.github.com/search/repositories?q=javascript",
+  "https://api.github.com/search/repositories?q=react",
+  "https://api.github.com/search/repositories?q=nodejs",
 ];
+
+sequencePromise(urls)
+  .then((responses) => {
+    responses.map((response) => console.log(response.items.length));
+  })
+  .catch((err) => console.log(err));

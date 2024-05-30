@@ -8,16 +8,20 @@ function makeCustomer<T extends User>(u: T): T {
   return {
     id: u.id,
     type: "customer",
-  };
+  } as T;
 }
+// 返回的类型是T
 
 // 2. fix the following code
 // requirement: the function should accept either two strings or two numbers at the same time,
 // so if parameters are one string and one number, it should throw an error
 function f(a: string | number, b: string | number) {
-  if (typeof a === "string") {
+  if (typeof a === "string" && typeof b === "string") {
     return `${a} : ${b}`;
-  } else {
+  } else if (typeof a === "number" && typeof b === "number") {
     return a + b;
+  } else {
+    throw new Error("Parameters must be either two strings or two numbers.");
   }
 }
+//联合类型+会报错
