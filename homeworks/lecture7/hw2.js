@@ -19,3 +19,55 @@
  */
 
 // your code here
+const http = require('http');
+const url = require('url');
+const PORT = 3000;
+
+const getParameters = (query) => {
+  let map = new Map();
+  if (!query) return map;
+
+  const params = query.split('&');
+  for (let p of params) {
+    const [key, val] = p.split('=');
+    map.set(key, val);
+  }
+
+  return map;
+}
+
+const server = http.createServer((req, res) => {
+  const urlInfo = url.parse(req.url);
+
+  const parameters = getParameters(urlInfo.query);
+
+  if (urlInfo.pathname === '/api/parsetime') {
+    if (!parameters.has('iso')) {
+      res.end('Please input the time');
+    } else {
+      const date = new Date(parameters.get('iso'));
+      const result = {
+        hour: date.getUTCHours(),
+        minute: date.getUTCMinutes(),
+        second: date.getUTCSeconds()
+      };
+      res.writeHead(200, { contentType: 'application/json' });
+      res.write(JSON.stringify(result));
+      res.end();
+    }
+  } else if (urlInfo.pathname === '/api/unixtime') {
+    if (!parameters.has('iso')) {
+      res.end('Please input the time');
+    } else {
+      res.writeHead(200, { contentType: 'application/json' });
+      res.write(JSON.stringify({
+        unixtime: new Date(parameters.get('iso')).getTime()
+      }));
+      res.end();
+    }
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

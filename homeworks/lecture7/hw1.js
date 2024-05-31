@@ -14,3 +14,22 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+const printFiles = (directory = '', extension = '') => {
+  fs.readdir(directory, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      const files = data.filter(file => path.extname(file) === `.${extension}`);
+      console.log(files);
+    }
+  });
+}
+
+if (process.argv.length < 4) {
+  console.error('Please input the directory name and the extension filter');
+} else {
+  printFiles(process.argv[2], process.argv[3]);
+}
