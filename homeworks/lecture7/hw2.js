@@ -19,3 +19,38 @@
  */
 
 // your code here
+const http = require('http')
+const url = require('url')
+
+const server = http.createServer((req, res) => {
+    const parsedUrl = url.parse(req.url, true)
+    const pathname = parsedUrl.pathname
+    const query = parsedUrl.query
+    const isoTime = query.iso
+
+    if(pathname === '/api/parsetime' && isoTime){
+        const date = new Date(isoTime)
+        const time = {
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+            second: date.getSeconds()
+        }
+        res.writeHead(200,{'Content-Type': 'application/json'});
+        res.end(JSON.stringify(time));
+
+    } else if (pathname === '/api/unixtime' && isoTime) {
+        const date = new Date(isoTime);
+        const unixTime = {
+            unixtime: date.getTime()
+        };
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(unixTime));
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not Found');
+    }
+})
+
+server.listen(3000, () => {
+    console.log('Server running at http://localhost:3000/');
+});
