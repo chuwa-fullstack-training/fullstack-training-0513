@@ -1,0 +1,20 @@
+{
+  "name": "lecture9",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "data:import": "node seeder.js",
+    "data:destroy": "node seeder.js -d"
+  },
+  "author": "Yu Chiao Lee",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  }
+}
