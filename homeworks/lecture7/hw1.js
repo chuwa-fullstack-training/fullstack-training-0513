@@ -14,3 +14,39 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+const dir = process.argv[2];
+const expectExtension = '.' + process.argv[3];
+
+if (!dir || !expectExtension) {
+  throw new Error('Please provide valid director and extension arguments');
+}
+
+//Use fs.readdir() method to read content 
+fs.readdir(dir, (err, data) => {
+  if (err) {
+    throw new Error(`Error read directory content: ${err.message}`);
+  }
+
+  //Filter by extension of the files
+  const resultFiles = data.filter(file => path.extname(file) === expectExtension);
+  resultFiles.forEach(file => {
+    console.log(file);
+  });
+})
+
+//For testing:
+//run: node hw1.js homework7TestDir txt
+//will list: file1.txt, file2.txt 
+//If run without txt extension -> will throw error message 
+//Error: Please provide both directory and extension arguments. 
+
+//2. run: node hw1.js homework7TestDir md
+//will list file3.md
+
+
+
+
+

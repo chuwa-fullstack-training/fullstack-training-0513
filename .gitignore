@@ -12,3 +12,9 @@ books/
 
 marp-diagrams/
 projects/
+
+# Ignore package-lock.json in the parent directory
+../package-lock.json
+
+# Ignore all files in the public directory
+public/
