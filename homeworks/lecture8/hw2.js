@@ -17,7 +17,7 @@
  *   ...
  *   }
  * ]}
- * 
+ *
  * result from https://hn.algolia.com/api/v1/search?query=banana&tags=story:
  * {
  *  "hits": [
@@ -42,3 +42,37 @@
  *  }
  * }
  */
+
+const express = require('express');
+const fetch = require('node-fetch');
+
+const app = express();
+const port = 3000;
+
+app.get('/get', async (req, res) => {
+    const { query1, query2 } = req.query;
+    try{
+        const res1 = await fetch(`https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query1)}&tags=story`);
+        const data1 = await res1.json();
+
+        const res2 = await fetch(`https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query2)}&tags=story`);
+        const data2 = await res2.json();
+
+        const result1 = data1.hits.length > 0 ? data1.hits[0] : { message: 'No results found for query1' };
+        const result2 = data2.hits.length > 0 ? data2.hits[0] : { message: 'No results found for query2' };
+
+        const finalResult = {
+            [query1]: {
+                created_at: result1.created_at,
+                title: result1.title
+            },
+            [query2]: {
+                created_at: result2.created_at,
+                title: result2.title
+            }
+        };
+        res.json(finalResult);
+    } catch {
+        res.status(500).send('Error fetching data');
+    }
+})

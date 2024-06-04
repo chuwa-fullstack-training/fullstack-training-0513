@@ -17,11 +17,15 @@ app.use('/api', postRouter);
 //   res.send(`this is ${req.params.name} page`);
 //   //   next();
 // });
+app.get('/home', (req, res, next) => {
+    console.log('this is the fitst middleware');
+    next();
+});
+app.get('/home', (req, res, next) => {
+  console.log('this is the second middleware');
+  //   res.send('another page');
 
-// // app.get('/home', (req, res, next) => {
-// //   console.log('this is the second middleware');
-// //   //   res.send('another page');
-// // });
+});
 
 // app.get('/home-another.html', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'public', 'another.html'));
