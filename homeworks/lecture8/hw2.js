@@ -42,3 +42,58 @@
  *  }
  * }
  */
+
+const express = require('express');
+const https = require('https');
+const app = express();
+
+app.get('/hw2', (req, res) => {
+    const { query1, query2 } = req.query;
+    const url1 = `https://hn.algolia.com/api/v1/search?query=${query1}&tags=story`;
+    const url2 = `https://hn.algolia.com/api/v1/search?query=${query2}&tags=story`;
+    const k1 = "created_at";
+    const k2 = "title";
+    Promise.all([getJSON(url1), getJSON(url2)])
+        .then(([response1, response2]) => {
+        const result = {
+            [query1]: { [k1]: response1.hits[0][k1], [k2]: response1.hits[0][k2]},
+            [query2]: { [k1]: response2.hits[0][k1], [k2]: response2.hits[0][k2]}
+        };
+        res.json(result);
+        })
+        .catch(err => res.status(500).json({ error: err.message }));
+    });
+
+function getJSON(url) { 
+    return new Promise((resolve, reject) => {
+        const options = {
+            headers: {
+                'User-Agent': 'request'
+            }
+        };
+        const request = https.get(url, options, response => {
+            if (response.statusCode !== 200) {
+                reject(`Did not get an OK from the server. Code: ${response.statusCode}`);
+                response.resume();
+            }
+            let data = '';
+            response.on('data', chunk => {
+                data += chunk;
+            });
+            response.on('end', () => {
+                try {
+                    resolve(JSON.parse(data));
+                } catch (e) {
+                    reject(new Error(e.message));
+                }
+            });
+        });
+        request.on('error', err => {
+            reject(`Encountered an error trying to make a request: ${err.message}`);
+        });
+    });
+}
+
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});
