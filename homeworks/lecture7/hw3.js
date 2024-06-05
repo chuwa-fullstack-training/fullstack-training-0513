@@ -24,23 +24,24 @@ const server = http.createServer((req, res) => {
       const queryIndex = url.indexOf('?');
       const queryString = queryIndex !== -1 ? url.slice(queryIndex + 1) : '';
 
-      if (queryString) {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(queryString);
-      } else {
-        fs.readFile(path.join(__dirname, 'home.html'), 'utf8', (err, html) => {
-          if (err) {
-            res.end('error');
-          } else {
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(html);
+      fs.readFile(path.join(__dirname, 'home.html'), 'utf8', (err, html) => {
+        if (err) {
+          res.end('error');
+        } else {
+          let modifiedHtml = html;
+          if (queryString) {
+            const combinedContent = `<div>${queryString}</div>`;
+            modifiedHtml = modifiedHtml.replace('</body>', `${combinedContent}</body>`);
           }
-        });
-      }
-    } else {
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.end(modifiedHtml);
+        }
+      });
+    }
+    else {
       res.end('this is the 404 page');
     }
-  }  else if (method === 'POST') {
+  } else if (method === 'POST') {
     if (url === '/create-post') {
       let body = [];
       req.on('data', chunk => {
