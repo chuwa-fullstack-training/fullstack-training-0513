@@ -9,6 +9,7 @@ const getAllEmployees = asyncHandler(async (req, res) => {
 
 const getEmployeeById = asyncHandler(async (req, res) => {
   const employee = await Employee.findById(req.params.id);
+
   if (employee) {
     res.status(200).json(employee);
   } else {

@@ -1,5 +1,6 @@
 const { asyncHandler } = require("../middleware");
 const Company = require("../models/companyModel");
+const Employee = require("../models/employeeModel");
 
 const getAllCompanies = asyncHandler(async (req, res) => {
   const companies = await Company.find({});
@@ -68,13 +69,19 @@ const updateCompany = asyncHandler(async (req, res) => {
 
 const deleteCompany = asyncHandler(async (req, res) => {
   const company = await Company.findById(req.params.id);
-  if (company) {
-    await Company.findByIdAndDelete(company._id);
-    res.status(200).json({ message: "Company deleted" });
-  } else {
-    res.status(404);
-    throw new Error("Company not found");
+  if (!company) {
+    res.status(404).json({ message: "Company not found" });
   }
+
+  const employees = await Employee.find({ company: company._id });
+
+  for (const employee of employees) {
+    employee.company = null;
+    await employee.save();
+  }
+
+  await Company.findByIdAndDelete(company._id);
+  res.status(200).json({ message: "Company deleted" });
 });
 
 module.exports = {
