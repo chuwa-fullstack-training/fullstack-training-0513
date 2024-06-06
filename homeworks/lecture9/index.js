@@ -1,21 +1,11 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 require('dotenv').config();
 const companyRouter = require('./routes/company');
 const employeeRouter = require('./routes/employee');
+const connectDB = require('./db');
 
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch(err => {
-    console.log('Error connecting to MongoDB', err);
-  });
+connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
