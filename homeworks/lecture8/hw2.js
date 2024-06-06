@@ -42,3 +42,60 @@
  *  }
  * }
  */
+const express = require('express');
+const http = require('https');
+
+const app = express();
+const port = 3000;
+
+function requestJSON(url, callback) {
+  http.get(url, res => {
+    let data = '';
+    res.on('data', chunk => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      callback(null, JSON.parse(data));
+    });
+  });
+}
+
+app.get('/hw2', (req, res) => {
+  const query1 = req.query.query1;
+  const query2 = req.query.query2;
+  if (!query1 || !query2) {
+    return res.status(400).json({ error: 'Please Provide both query1 and query2'});
+  }
+  const url1 = `https://hn.algolia.com/api/v1/search?query=query1&tags=story`;
+  const url2 = `https://hn.algolia.com/api/v1/search?query=query2&tags=story`;
+
+  requestJSON(url1, (err1, data1) => {
+    if (err1) {
+      return res.status(500).json({ error: `Error in fetch URL1: ${err1.message}`});
+    }
+    requestJSON(url2, (err2, data2) => {
+      if (err2) {
+        return res.status(500).json({error: `Error fetching URL2: ${err2.message}`});
+      }
+      const result1 = data1.hits.length > 0 ? data1.hits[0] : {};
+      const result2 = data2.hits.length > 0 ? data2.hits[0] : {};
+
+      const finalResult = {
+        [query1]: {
+          created_at: result1.created_at,
+          title: result1.title
+        },
+        [query2]: {
+          created_at: result2.created_at,
+          title: result2.title
+        }
+      };
+      res.json(finalResult);
+    });
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
+
