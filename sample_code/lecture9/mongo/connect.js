@@ -1,8 +1,12 @@
+require('dotenv').config({ path: 'sample_code/lecture9/.env' });
+
 const mongoose = require('mongoose');
-require('dotenv').config();
+
+const mongoURI = process.env.MONGODB_URI;
+console.log('MongoDB URI:', mongoURI); 
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
