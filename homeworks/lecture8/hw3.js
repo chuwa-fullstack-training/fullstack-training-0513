@@ -22,15 +22,8 @@ const port = 3000;
 app.set("view engine", "pug");
 app.set("views", "./hw3Views");
 
-// Set up middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Set up custom middleware
-app.use((req, res, next) => {
-  console.log("Request URL:", req.url);
-  console.log("Time:", Date.now());
-  next();
-});
 
 router.get("/", (req, res) => {
   res.render("home");

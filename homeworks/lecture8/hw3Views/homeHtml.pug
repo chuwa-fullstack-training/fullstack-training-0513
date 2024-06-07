@@ -10,6 +10,8 @@ html(lang="en")
             input(type="text" name="title")
             input(type="text" name="content")
             input(type="submit" value="Submit")
-        ul
-          p title: #{query.title}
-          p content: #{query.content}
+            
+        if query
+          ul
+            p title: #{query.title}
+            p content: #{query.content}
