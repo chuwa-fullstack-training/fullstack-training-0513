@@ -14,3 +14,28 @@
  */
 
 // your code here
+// import modules
+const fs = require('fs');
+const path = require('path');
+
+// get dirName，file extension through process
+const dirName = process.argv[2];
+const designatedExtension = process.argv[3] ? '.' + process.argv[3] : undefined;
+
+if (!dirName) {
+    throw new Error('please provide a valid director.');
+}
+
+// get result
+fs.readdir(dirName, (err, files) => {
+    if (err) {
+        throw err;
+    } else if (designatedExtension) {
+        files = files.filter(file => path.extname(file) === designatedExtension);
+    }
+    
+    files.forEach(file => console.log(file));
+})
+
+// test node hw1 ../lecture9 md // log "hw1.md"
+// test node hw1 ../lecture8 // log all files
