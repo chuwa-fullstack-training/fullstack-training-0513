@@ -19,3 +19,52 @@
  */
 
 // your code here
+
+const http = require('http');
+const url = require('url');
+const PORT = 3000;
+
+function handleParseTime(isoTime) {
+    const date = new Date(isoTime);
+    return {
+        hour: date.getUTCHours(),
+        minute: date.getUTCMinutes(),
+        second: date.getUTCSeconds()
+    };
+}
+
+function handleUnixTime(isoTime) {
+    const date = new Date(isoTime);
+    return {
+        unixtime: date.getTime()
+    };
+}
+
+const server = http.createServer((req, res) => {
+
+    const parsedUrl = url.parse(req.url, true);
+    const pathname = parsedUrl.pathname;
+    const isoTime = parsedUrl.query.iso;
+
+    let result;
+
+    if (pathname === '/api/parsetime') {
+        result = handleParseTime(isoTime);
+    } else if (pathname === '/api/unixtime') {
+        result = handleUnixTime(isoTime);
+    }
+
+    if (result) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+    }
+    else {
+        res.end('this is the 404 page');
+    }
+
+
+});
+
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});

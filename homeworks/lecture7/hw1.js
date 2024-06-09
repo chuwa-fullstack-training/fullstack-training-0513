@@ -14,3 +14,29 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+
+const dir = process.argv[2] || __dirname;
+
+console.log(dir);
+
+const ext = process.argv[3];
+try {
+    fs.readdir(dir,
+        { withFileTypes: true },
+        (err, files) => {
+            if (err) {
+                throw err;
+            }
+                console.log(`\nIn the directory ${dir}, files with ${ext} are:`);
+            files.forEach(file => {
+                if (!ext || path.extname(file.name).includes(ext))
+                    console.log(file.name);
+            })
+        })
+} catch (err) {
+    console.error(`Error: ${err.message}`);
+}
+
+
