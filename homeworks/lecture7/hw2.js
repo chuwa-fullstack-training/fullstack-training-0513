@@ -19,3 +19,46 @@
  */
 
 // your code here
+
+const http = require('http');
+const url = require('url')
+const PORT = 3000;
+
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url,true);
+  const {pathname, query} = parsedUrl;
+  const iso = query.iso;
+  if (req.method === "GET"){
+    if (pathname === '/api/parsetime'){
+        if (!iso){
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'missing query' }));
+            return;
+        }
+        const date = new Date(iso);
+        const dateJSON = {
+            hour: date.getHours(), 
+            minute: date.getMinutes(), 
+            second: date.getSeconds(),
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(dateJSON));
+    } else if (pathname === '/api/unixtime'){
+        if (!iso){
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'missing query' }));
+            return;
+        }
+        const date = new Date(iso);
+        const unixtime = {unixtime: date.getTime()};
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(unixtime));
+    }
+  };
+});
+
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
