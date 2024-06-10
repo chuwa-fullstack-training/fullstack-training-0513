@@ -4,7 +4,8 @@ const { Schema } = mongoose;
 const employeeSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   lastName: {
     type: String,

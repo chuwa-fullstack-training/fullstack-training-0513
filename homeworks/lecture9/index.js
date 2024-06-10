@@ -3,6 +3,7 @@ const app = express();
 require('dotenv').config();
 const companyRouter = require('./routes/company');
 const employeeRouter = require('./routes/employee');
+const auth = require('./routes/auth');
 const connectDB = require('./db');
 
 connectDB();
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/companies', companyRouter);
 app.use('/employees', employeeRouter);
+app.use('/api', auth);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

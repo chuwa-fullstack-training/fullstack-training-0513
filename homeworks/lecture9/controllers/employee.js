@@ -4,8 +4,13 @@ const Company = require("../models/company");
 
 const getAllEmployees = async (req, res) => {
   try {
-    const data = await Employee.find();
-    res.status(200).json(data);
+    if (req.user) {
+      const data = await Employee.find();
+      res.status(200).json(data);
+    } else {
+      const data = await Employee.find({}, 'firstName lastName');
+      res.status(200).json(data);
+    }
   } catch (e) {
     console.error(e);
     res.status(400).send(e.message);
@@ -37,8 +42,14 @@ const getEmployee = async (req, res) => {
   try {
     const {id} = req.params;
     const ID = new mongoose.Types.ObjectId(id);
-    const data = await Employee.findById(ID);
-    res.status(200).json(data);
+
+    if (req.user) {
+      const data = await Employee.findById(ID);
+      res.status(200).json(data);
+    } else {
+      const data = await Employee.findById(ID, 'firstName lastName');
+      res.status(200).json(data);
+    }
   } catch (e) {
     console.error(e);
     res.status(400).send(e.message);

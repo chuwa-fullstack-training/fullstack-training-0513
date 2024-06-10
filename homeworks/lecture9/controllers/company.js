@@ -63,7 +63,9 @@ const deleteCompany = async (req, res) => {
 
 const getEmployeesOfCompany = async (req, res) => {
   try {
-    const {id} = req.params;
+    if (!req.user) return res.status(401).send('No token, authorization denied');
+
+    const id = req.user.company
     const ID = new mongoose.Types.ObjectId(id);
     const employees = await Employee.find({ company: ID });
     res.status(200).json(employees);

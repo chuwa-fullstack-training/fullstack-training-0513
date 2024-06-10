@@ -7,10 +7,11 @@ const {
   updateEmployee,
   deleteEmployee
 } = require('../controllers/employee');
+const auth = require('../middlewares/auth');
 
-router.get('/', getAllEmployees);  // Get all employees
+router.get('/', auth, getAllEmployees);  // Get all employees
 router.post('/create', createEmployee);  // Create a new employee
-router.get('/:id', getEmployee);  // Get an employee by id
+router.get('/:id', auth, getEmployee);  // Get an employee by id
 router.patch('/:id', updateEmployee);  // Update an employee by id
 router.delete('/:id', deleteEmployee);  // Delete an employee by id
 
