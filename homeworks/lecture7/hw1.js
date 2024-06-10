@@ -14,3 +14,24 @@
  */
 
 // your code here
+const fs = require('fs');
+const path = require('path');
+const directory = process.argv[2];
+const extension = process.argv[3];
+if (!directory || !extension){
+  throw new Error(`Please enter command like "node hw1.js directory extension"`);
+}
+function filterFileByExt(dir, ext) {
+  fs.readdir(dir, (err, files) => {
+    if (err){
+      throw new Error(err);
+    }
+    files.forEach(file => {
+      if(path.extname(file) === `.${ext}`){
+        console.log(file);
+      }
+    });
+  });
+}
+
+filterFileByExt(directory, extension);

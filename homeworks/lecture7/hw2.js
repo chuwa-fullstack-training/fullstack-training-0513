@@ -19,3 +19,58 @@
  */
 
 // your code here
+
+const http = require('http');
+const url = require('url');
+const PORT = 3000;
+
+const handleParseTime = (date, res) => {
+  const obj = {
+    hour: date.getUTCHours(),
+    minute: date.getUTCMinutes(),
+    second: date.getUTCSeconds()
+  };
+  res.writeHead(200, { 'content-type' : 'application/json'});
+  res.end(JSON.stringify(obj));
+};
+
+const handleUnixTime = (date, res) => {
+  const obj = {
+    unixtime: date.getTime()
+  };
+  res.writeHead(200, { 'content-type' : 'application/json'});
+  res.end(JSON.stringify(obj));
+};
+
+const server = http.createServer((req, res) => {
+  const { url: reqUrl, method } = req;
+  const { pathname, query } = url.parse(reqUrl, true);
+  if (method === 'GET') {
+    const iso = query.iso;
+    if(!iso){
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: "ISO not included in the url" }));
+      return;
+    }
+
+    const date = new Date(iso);
+    if(pathname === '/api/parsetime'){
+      handleParseTime(date, res);
+    }
+    else if(pathname === '/api/unixtime'){
+      handleUnixTime(date, res);
+    }
+    else{
+      res.writeHead(404, { 'content-Type' : 'application/json' });
+      res.end(JSON.stringify({ error: 'Not Found'}))
+    }
+  }
+  else{
+    res.writeHead(405, { 'content-Type' : 'application/json' });
+    res.end(JSON.stringify({ error: 'Not this method'}))
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
