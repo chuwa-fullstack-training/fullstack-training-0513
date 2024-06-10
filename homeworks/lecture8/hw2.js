@@ -42,3 +42,44 @@
  *  }
  * }
  */
+const express = require('express');
+const axios = require('axios');
+
+const app = express();
+const PORT = 3000;
+
+const router = express.Router();
+
+router.get('/', async(req, res)=>{
+    const {query1, query2} = req.query;
+    try{
+        const result1 = await axios.get(`https://hn.algolia.com/api/v1/search?query=${query1}&tags=story`);
+        const result2 = await axios.get(`https://hn.algolia.com/api/v1/search?query=${query2}&tags=story`);
+
+        const data1 = result1.data.hits[0];
+        const data2 = result2.data.hits[0];
+
+        const result = {
+            [query1]: {
+                created_at: data1.created_at,
+                title: data1.title,
+            },
+            [query2]:{
+                created_at: data2.created_at,
+                title: data2.title,
+            }
+        }
+
+        res.json(result);
+
+    }catch (error) {
+        console.error('Error fetching data from API:', error);
+        res.status(500).json({ error: 'Failed to fetch data from API' });
+      }
+
+});
+
+app.use('/hw2', router);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });

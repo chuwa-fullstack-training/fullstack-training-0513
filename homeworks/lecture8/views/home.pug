@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Cool Home Page
+  body
+    h1 Welcome to Nodejs tutorial
+    form(action="/create-post", method="post")
+      label(for="title") Title:
+      input(type="text", id="title", name="title")
+      br
+      label(for="content") Content:
+      input(type="text", id="content", name="content")
+      br
+      input(type="submit", value="Submit")
+
+    if formData
+      div
+        h2 Submitted Form Data:
+        p Title: #{formData.title}
+        p Content: #{formData.content}
