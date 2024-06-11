@@ -42,3 +42,66 @@
  *  }
  * }
  */
+
+
+const express = require('express');
+const https = require('https');
+
+const app = express();
+const port = 3000;
+
+const fetchData = (query) => {
+    const url = `https://hn.algolia.com/api/v1/search?query=${query}&tags=story`;
+
+    return new Promise((resolve, reject) => {
+        https.get(url, (response) => {
+            let data = '';
+
+            response.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            response.on('end', () => {
+                try {
+                    const result = JSON.parse(data);
+                    resolve(result.hits[0]); 
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }).on('error', (error) => {
+            reject(error);
+        });
+    });
+};
+
+app.get('/hw2', async (req, res) => {
+    const query1 = req.query.query1;
+    const query2 = req.query.query2;
+
+    if (!query1 || !query2) {
+        return res.status(400).send({ error: 'no query1 or query2' });
+    }
+
+    try {
+        const result1 = await fetchData(query1);
+        const result2 = await fetchData(query2);
+
+        const result = {
+            [query1]: result1 ? {
+                author: result1.author,
+                title: result1.title
+            } : null,
+            [query2]: result2 ? {
+                author: result2.author,
+                title: result2.title
+            } : null
+        };
+
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
