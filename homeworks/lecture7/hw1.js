@@ -14,3 +14,34 @@
  */
 
 // your code here
+console.log(process.argv);
+const fs = require("fs");
+const path = require("path");
+if (process.argv[2] === null || process.argv[3] === null) {
+  throw new Error("please enter valid command");
+}
+const directoryPath = process.argv[2]; //这里写`./${process.argv[2]}`也没问题
+let type = process.argv[3];
+
+fs.readdir(directoryPath, (err, files) => {
+  if (err) console.error("error:", err);
+  let res;
+  if (type == "") {
+    res = files.filter((file) => path.extname(file) === type);
+  } else {
+    type = "." + type;
+    res = files.filter((file) => path.extname(file) === type);
+  }
+  console.log("The filtered result:", res);
+});
+//test case1:
+//node hw1.js test ''
+//output: [ 'test4' ]
+
+//test case2:
+//node hw1.js test txt
+//output: [ 'test1.txt', 'text2.txt' ]
+
+//test case3:
+//node hw1.js test html
+//output: [ 'text3.html' ]

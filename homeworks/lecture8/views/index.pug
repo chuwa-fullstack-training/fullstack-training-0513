@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Cool Home Page
+  body
+    h1 Welcome to Nodejs tutorial
+    form(action="/create-post" method="post")
+      input(type="text" name="name")
+      input(type="text" name="age")
+      input(type="submit" value="submit")
+    div#data
+    script.
+      function getParams(){
+        const params = {};
+        const queryString = window.location.search.slice(1);//window.location.search的结果是"?name=john&age=21"
+        queryString.split('&').forEach(pair=>{
+          const [key, value] = pair.split('=');
+          params[key] = value;
+        })
+        return params;
+      }
+      window.onload = ()=>{
+        const params = getParams();
+        const div = document.getElementById('data');
+        for(const key in params){
+          div.innerHTML += `<p>${key}: ${params[key]}</p>`;
+        }
+      }

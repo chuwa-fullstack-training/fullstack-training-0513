@@ -17,7 +17,7 @@
  *   ...
  *   }
  * ]}
- * 
+ *
  * result from https://hn.algolia.com/api/v1/search?query=banana&tags=story:
  * {
  *  "hits": [
@@ -27,7 +27,7 @@
  *   ...
  *   }
  * ]}
- * 
+ *
  * final result from http://localhost:3000/hw2?query1=apple&query2=banana:
  * {
  *   "apple":
@@ -42,3 +42,39 @@
  *  }
  * }
  */
+const express = require("express");
+const app = express();
+const port = 3000;
+app.get("/hw2", async (req, res) => {
+  const { query1, query2 } = req.query;
+  if (!query1 || !query2) {
+    return res.status(400).send("missing query");
+  }
+  const url1 = `https://hn.algolia.com/api/v1/search?query=${query1}&tags=story`;
+  const url2 = `https://hn.algolia.com/api/v1/search?query=${query2}&tags=story`;
+  const result = {};
+  fetch(url1)
+    .then((res) => res.json())
+    .then((data) => {
+      //   console.log(data.hits[0]);
+      result[query1] = {
+        created_at: data.hits[0].created_at,
+        title: data.hits[0].title,
+      };
+      return fetch(url2);
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      //   console.log(data);
+      result[query2] = {
+        created_at: data.hits[0].created_at,
+        title: data.hits[0].title,
+      };
+      console.log(result);
+      //   res.status(200).json(result);
+    })
+    .then(() => res.status(200).json(result))
+    .catch((err) => console.log(err));
+});
+
+app.listen(port, () => "server is running on port " + port);
