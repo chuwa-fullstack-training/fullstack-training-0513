@@ -23,7 +23,7 @@ app.post('/api/todos', async (req, res) => {
     todo: req.body.todo
   });
   await todo.save();
-  res.json(todos);
+  res.json(todo);
 });
 
 app.put('/api/todos/:id', async (req, res) => {
