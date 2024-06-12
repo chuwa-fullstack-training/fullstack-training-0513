@@ -19,3 +19,63 @@
  */
 
 // your code here
+const http = require("http");
+const url = require("url");
+
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url, true);
+  const pathname = parsedUrl.pathname;
+  const query = parsedUrl.query;
+
+  if (req.method === "GET") {
+    if (pathname === "/api/parsetime") {
+      const iso = query.iso;
+      if (!iso) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "ISO time is missing" }));
+        return;
+      }
+      const date = new Date(iso);
+      if (isNaN(date.getTime())) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid ISO time" }));
+        return;
+      }
+      const response = {
+        hour: date.getUTCHours(),
+        minute: date.getUTCMinutes(),
+        second: date.getUTCSeconds(),
+      };
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(response));
+    } else if (pathname === "/api/unixtime") {
+      const iso = query.iso;
+      if (!iso) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "ISO time is missing" }));
+        return;
+      }
+      const date = new Date(iso);
+      if (isNaN(date.getTime())) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid ISO time" }));
+        return;
+      }
+      const response = {
+        unixtime: date.getTime(),
+      };
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(response));
+    } else {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Not Found" }));
+    }
+  } else {
+    res.writeHead(405, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "Method Not Allowed" }));
+  }
+});
+
+server.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});

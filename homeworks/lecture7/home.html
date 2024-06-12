@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cool Home Page</title>
+  </head>
+  <body>
+    <form action="/create-post" method="post">
+      <input type="text" name="title" placeholder="Title" />
+      <input type="text" name="content" placeholder="Content" />
+      <input type="submit" value="submit" />
+    </form>
+    <div id="submitted-data"></div>
+    <script>
+      function getQueryParams() {
+        const queryString = window.location.search.substring(1);
+        const params = {};
+        const pairs = queryString.split("&");
+        for (const pair of pairs) {
+          const [key, value] = pair.split("=");
+          params[decodeURIComponent(key)] = decodeURIComponent(value);
+        }
+        return params;
+      }
+
+      function displaySubmittedData() {
+        const params = getQueryParams();
+        const displayDiv = document.getElementById("submitted-data");
+        for (const key in params) {
+          const p = document.createElement("p");
+          p.textContent = `${key}: ${params[key]}`;
+          displayDiv.appendChild(p);
+        }
+      }
+
+      window.onload = displaySubmittedData;
+    </script>
+  </body>
+</html>
