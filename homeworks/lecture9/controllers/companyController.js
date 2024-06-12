@@ -26,7 +26,7 @@ module.exports = {
 
   updateCompanyById: async (req, res) => {
     try {
-      const company = await Company.findByIdAndUpdate(req.params.id, req.body, { new: true});
+      const company = await Company.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!company) {
         return res.status(404).json({ error: 'Company not found'});
       }
@@ -42,7 +42,7 @@ module.exports = {
       if (!company) {
         return res.status(404).json({ error: 'Company not found'});
       }
-      res.json({message: 'Company deleted successfully', deletedCompanyId: req.params.id });
+      res.json({ message: 'Company deleted successfully', deletedCompanyId: req.params.id });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
