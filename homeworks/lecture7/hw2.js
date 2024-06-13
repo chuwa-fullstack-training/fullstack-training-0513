@@ -19,3 +19,44 @@
  */
 
 // your code here
+
+
+const http = require('http');
+const url = require('url');
+
+const server = http.createServer((req, res) => {
+    const parsedUrl = url.parse(req.url, true); 
+    const pathname = parsedUrl.pathname;
+    const iso = parsedUrl.query.iso;
+
+    if (!iso) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "ISO date is required" }));
+        return;
+    }
+
+    const date = new Date(iso);  
+
+    if (pathname === '/api/parsetime') {
+        const time = {
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+            second: date.getSeconds()
+        };
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(time));
+    } else if (pathname === '/api/unixtime') {
+        const time = {
+            unixtime: date.getTime()
+        };
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(time));
+    } else {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Endpoint not found" }));
+    }
+});
+
+server.listen(8000, () => {
+    console.log('Server running on http://localhost:8000/');
+});

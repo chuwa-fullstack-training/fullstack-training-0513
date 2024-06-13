@@ -21,12 +21,18 @@ function makeCustomer<T extends User>(u: T): T {
 // 2. fix the following code
 // requirement: the function should accept either two strings or two numbers at the same time,
 // so if parameters are one string and one number, it should throw an error
-function f1(a: string | number, b: string | number) {
+function f(a: string | number, b: string | number): string | number {
+  if (typeof a !== typeof b) {
+    throw new Error("Both parameters must be of the same type");
+  }
+
   if (typeof a === "string" && typeof b === "string") {
     return `${a} : ${b}`;
   } else if (typeof a === "number" && typeof b === "number") {
     return a + b;
-  } else {
-    throw new Error("function should accept either two strings or two numbers at the same time");
   }
+  throw new Error("Invalid argument types");
 }
+// Throwing an error when one parameter is a string and the other is a number requires adding the appropriate type checking. This will prevent type mismatches and enforce the constraints you specify.
+
+

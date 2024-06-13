@@ -42,3 +42,38 @@
  *  }
  * }
  */
+
+
+
+
+const express = require('express');
+const axios = require('axios');
+
+const hw2Router = express.Router();
+
+hw2Router.get('/', async (req, res) => {
+    const query1 = req.query.query1;
+    const query2 = req.query.query2;
+
+    if (!query1 || !query2) {
+        return res.status(400).send({ error: 'Missing query parameters' });
+    }
+
+    try {
+        const [response1, response2] = await Promise.all([
+            axios.get(`https://hn.algolia.com/api/v1/search?query=${query1}&tags=story`),
+            axios.get(`https://hn.algolia.com/api/v1/search?query=${query2}&tags=story`)
+        ]);
+
+        const result = {
+            [query1]: response1.data.hits[0],
+            [query2]: response2.data.hits[0]
+        };
+
+        res.json(result);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+});
+
+module.exports = hw2Router;
