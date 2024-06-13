@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Todo List
+  body
+    h1 Todo List
+
+    // Form to submit a new todo
+    form(action='/api/toDo', method='POST')
+      label(for='title') Title:
+      input(type='text', name='title', required)
+      br
+      label(for='description') Description:
+      input(type='text', name='description')
+      br
+      button(type='submit') Add Todo
+
+    // List of toDos
+    if toDos.length > 0
+      h2 To Do List
+      ul
+        each todo in toDos
+          li
+            span(style=(todo.completed ? 'text-decoration: line-through' : ''))= todo.title
+            | - 
+            span= todo.description
+    else
+      p No toDos found. Please add some toDos.
