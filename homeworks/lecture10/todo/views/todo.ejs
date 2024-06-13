@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1><%= todo.title %></h1>
+    <p><%= todo.description %></p>
+    <form action="/<%= todo._id %>?_method=PUT" method="POST">
+        <input type="text" name="title" value="<%= todo.title %>" required>
+        <input type="text" name="description" value="<%= todo.description %>">
+        <input type="checkbox" name="completed" <%= todo.completed ? 'checked' : '' %>> Completed
+        <button type="submit">Update</button>
+    </form>
+    <form action="/<%= todo._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+    <a href="/">Back to List</a>
+</body>
+</html>
