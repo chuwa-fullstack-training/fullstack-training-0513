@@ -9,6 +9,7 @@ pre_draw/
 books/
 .idea/
 .env
+package-lock.json
 
 marp-diagrams/
 projects/
