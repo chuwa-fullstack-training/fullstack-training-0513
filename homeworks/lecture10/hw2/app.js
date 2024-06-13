@@ -58,5 +58,15 @@ app.put("/todos/:id", async (req, res) => {
     res.json({ error: error.message });
   }
 });
+app.delete("/todos/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    let todo = await Todo.findOneAndDelete({ id: id });
+    console.log(todo);
+    res.json({ todo });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 app.listen(port, () => console.log("server is running on port :" + port));

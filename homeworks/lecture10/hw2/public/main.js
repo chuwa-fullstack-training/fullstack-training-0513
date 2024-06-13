@@ -9,6 +9,19 @@ function handleCheck(ele) {
     });
 }
 
+function handleDelete(ele) {
+  const id = ele.dataset.id;
+  console.log("click");
+  fetch(`/todos/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      window.location.reload();
+    });
+}
+
 function handleSubmit() {
   const todo = document.querySelector("#todo").value;
   if (!todo) return alert("Please enter a todo");
