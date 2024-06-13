@@ -42,3 +42,72 @@
  *  }
  * }
  */
+
+const express = require('express');
+const app = express();
+const https = require('https');
+const PORT = 3000;
+
+const fetchFromApi = (query) =>{
+  const url = `https://hn.algolia.com/api/v1/search?query=${query}&tags=story`;
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        resolve(JSON.parse(data));
+      });
+    }).on('error', (err) => {
+      reject(err);
+    });
+  });
+};
+
+const hw2Router = express.Router();
+
+hw2Router.get('/', async (req, res) => {
+  const query1 = req.query.query1;
+  const query2 = req.query.query2;
+
+  if(!query1 || !query2){
+    res.status(400).json({error: "Missing query parameters"});
+    return;
+  }
+
+  try {
+    const [result1, result2] = await Promise.all([fetchFromApi(query1), fetchFromApi(query2)]);
+
+    const response = {
+      [query1]: {
+        created_at: result1.hits[0].created_at,
+        title: result1.hits[0].title,
+      },
+      [query2]: {
+        created_at: result2.hits[0].created_at,
+        title: result2.hits[0].title,
+      }
+    };
+
+    res.json(response)
+  }
+  catch (err) {
+    res.status(500).json({error: err.message});
+  }
+});
+
+
+app.get('/', (req, res) => {
+  res.send("This is the home Page.");
+});
+
+app.use('/hw2', hw2Router);
+
+app.get('*', (req, res) => {
+  res.status(404).send("Not Found");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
