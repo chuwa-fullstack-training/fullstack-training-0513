@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Todo = require('./models/Todo');
+const Todo = require('../models/Todo');
 
 // Get all todos
 router.get('/', async (req, res) => {
   try {
     const todos = await Todo.find();
     res.render('index', { todos });
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
@@ -19,7 +20,8 @@ router.post('/', async (req, res) => {
     const newTodo = new Todo({ todo });
     await newTodo.save();
     res.json(newTodo);
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -34,7 +36,8 @@ router.put('/:id', async (req, res) => {
     todo.done = !todo.done;
     await todo.save();
     res.json(todo);
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -47,7 +50,8 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Todo not found' });
     }
     res.json({ message: 'Todo deleted' });
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });

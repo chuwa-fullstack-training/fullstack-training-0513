@@ -4,11 +4,12 @@ const { Company, Employee } = require('./models');
 
 // Create a new company
 router.post('/companies', async (req, res) => {
-  try {
+  try{
     const company = new Company(req.body);
     await company.save();
     res.status(201).json(company);
-  } catch (err) {
+  }
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -22,7 +23,8 @@ router.post('/employees', async (req, res) => {
       $push: { employees: employee._id }
     });
     res.status(201).json(employee);
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -33,10 +35,12 @@ router.get('/companies/:id', async (req, res) => {
     const company = await Company.findById(req.params.id).populate('employees');
     if (!company) {
       res.status(404).json({ error: 'Company not found' });
-    } else {
+    } 
+    else {
       res.json(company);
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -47,10 +51,12 @@ router.get('/employees/:id', async (req, res) => {
     const employee = await Employee.findById(req.params.id).populate('company');
     if (!employee) {
       res.status(404).json({ error: 'Employee not found' });
-    } else {
+    } 
+    else {
       res.json(employee);
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -61,10 +67,12 @@ router.put('/companies/:id', async (req, res) => {
     const company = await Company.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!company) {
       res.status(404).json({ error: 'Company not found' });
-    } else {
+    } 
+    else {
       res.json(company);
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -75,10 +83,12 @@ router.put('/employees/:id', async (req, res) => {
     const employee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!employee) {
       res.status(404).json({ error: 'Employee not found' });
-    } else {
+    } 
+    else {
       res.json(employee);
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -89,11 +99,13 @@ router.delete('/companies/:id', async (req, res) => {
     const company = await Company.findByIdAndDelete(req.params.id);
     if (!company) {
       res.status(404).json({ error: 'Company not found' });
-    } else {
+    } 
+    else {
       await Employee.deleteMany({ company: company._id });
       res.json({ message: 'Company and its employees deleted' });
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -104,11 +116,13 @@ router.delete('/employees/:id', async (req, res) => {
     const employee = await Employee.findByIdAndDelete(req.params.id);
     if (!employee) {
       res.status(404).json({ error: 'Employee not found' });
-    } else {
+    } 
+    else {
       await Company.findByIdAndUpdate(employee.company, { $pull: { employees: employee._id } });
       res.json({ message: 'Employee deleted' });
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -118,7 +132,8 @@ router.get('/companies', async (req, res) => {
   try {
     const companies = await Company.find().populate('employees');
     res.json(companies);
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -128,7 +143,8 @@ router.get('/employees', async (req, res) => {
   try {
     const employees = await Employee.find().populate('company');
     res.json(employees);
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
@@ -139,10 +155,12 @@ router.get('/companies/:id/employees', async (req, res) => {
     const company = await Company.findById(req.params.id).populate('employees');
     if (!company) {
       res.status(404).json({ error: 'Company not found' });
-    } else {
+    } 
+    else {
       res.json(company.employees);
     }
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(400).json({ error: err.message });
   }
 });

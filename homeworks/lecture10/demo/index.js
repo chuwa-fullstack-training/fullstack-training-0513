@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const todoRoutes = require('./routes/todos');
+const Todo = require('./models/Todo');
 
 const app = express();
 const PORT = 3000;

@@ -10,7 +10,7 @@ router.post('/companies', async (req, res) => {
     res.status(201).json(company);
   }
   catch (err) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: err.message });
   }
 });
 
