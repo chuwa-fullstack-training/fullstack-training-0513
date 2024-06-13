@@ -1,8 +1,8 @@
 function Hw2() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column'}}>
-        <header>Header</header>
-        <nav>Nav</nav>
+        <header><h2>Header</h2></header>
+        <nav><h2>Nav</h2></nav>
         <div style={{ display: 'flex'}}>
           <aside>
             <h2>Aside</h2>
