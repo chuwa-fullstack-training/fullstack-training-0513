@@ -44,7 +44,7 @@
  */
 
 const express = require('express')
-
+const http = require('http')
 const app = express()
 const port = 3000
 
@@ -54,6 +54,25 @@ app.get("/hw2", (req, res) => {
         res.send("400 - Bad Request");
         return; 
     } else {
+        let q1 = req.query["query1"], q2 = req.query["query2"];
+        console.log(q1);
+        console.log(q2);
+        let q1res, q2res;
+        let promise1 = fetch(`https://hn.algolia.com/api/v1/search?query=${q1}&tags=story`)
+        .then(r => r.json() );
+        // .then(r => { r.hits[0]; })
+        let promise2 = fetch(`https://hn.algolia.com/api/v1/search?query=${q2}&tags=story`)
+        .then(r => r.json() );
+        Promise.all([promise1, promise2]).then(rarr => {
+            let obj = {};
+            obj[q1] = {};
+            obj[q1]["created_at"] = rarr[0].hits[0]["created_at"];
+            obj[q1]["title"] = rarr[0].hits[0]["title"];
+            obj[q2] = {};
+            obj[q2]["created_at"] = rarr[1].hits[0]["created_at"];
+            obj[q2]["title"] = rarr[1].hits[0]["title"];
+            res.send(obj);
+        }).catch(err => { res.send("Unable to fetch data from source\n"); });
         
     }
 });
