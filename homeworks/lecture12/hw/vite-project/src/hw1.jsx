@@ -10,7 +10,7 @@
 
 import React from 'react';
 
-class hw1 extends React.Component {
+class Hw1 extends React.Component {
   render() {
     return (
       <div>
@@ -27,5 +27,5 @@ class hw1 extends React.Component {
   }
 }
 
-export default hw1;
+export default Hw1;
 
