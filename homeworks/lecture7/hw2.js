@@ -18,4 +18,48 @@
  * 2. response.writeHead(200, { contentType: 'application/json' })
  */
 
-// your code here
+const http = require("http");
+const urllib = require("url");
+
+const HOSTNAME = "localhost", PORT = 3000;
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    let url = new URL(`http://${HOSTNAME}:${PORT}${req.url}`);
+    let queryparams = url.searchParams;
+    console.log(queryparams);
+    if (url.pathname === "/api/parsetime") {
+        if (queryparams.has("iso")) {
+            res.setHeader("Content-Type", "application/json");
+            let date = new Date(queryparams.get("iso"));
+            let tmobj = {
+                "hour" : date.getUTCHours(),
+                "minute" : date.getUTCMinutes(),
+                "second" : date.getUTCSeconds()
+            };
+            res.end(JSON.stringify(tmobj));
+        } else {
+            res.statusCode = 400;
+            res.end("400 - Bad Request\n");
+        }
+    } else if (url.pathname === "/api/unixtime") {
+        if (queryparams.has("iso")) {
+            res.setHeader("Content-Type", "application/json");
+            let date = new Date(queryparams.get("iso"));
+            let tmobj = {
+                "unixtime" : date.getTime()
+            }
+            res.end(JSON.stringify(tmobj));
+        } else {
+            res.statusCode = 400;
+            res.end("400 - Bad Request\n");
+        }
+    } else {
+        res.statusCode = 404;
+        res.end("404 - Not Found\n");
+    }
+})
+
+server.listen(PORT, HOSTNAME, () => {
+    console.log(`Server Listening on ${HOSTNAME} ${PORT}\n`);
+})

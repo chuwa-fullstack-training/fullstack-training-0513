@@ -42,3 +42,22 @@
  *  }
  * }
  */
+
+const express = require('express')
+
+const app = express()
+const port = 3000
+
+app.get("/hw2", (req, res) => {
+    if (!("query1" in req.query) || !("query2" in req.query)) {
+        res.statusCode = 400;
+        res.send("400 - Bad Request");
+        return; 
+    } else {
+        
+    }
+});
+
+app.listen(port, () => {
+    console.log(`app listening on port ${port}`)
+})
