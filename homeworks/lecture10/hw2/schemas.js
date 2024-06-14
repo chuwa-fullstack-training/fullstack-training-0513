@@ -15,4 +15,10 @@ const ToDoListSchema = new Schema({
     deadline: {
         type: Date
     }
-})
+});
+
+const ToDoList = mongoose.model('ToDoList', ToDoListSchema);
+
+module.exports = ToDoList;
+
+
