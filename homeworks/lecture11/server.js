@@ -1,22 +1,20 @@
-require('dotenv').config();
-
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const router = require('./router');
-const PORT = 3000;
+const companyRouter = require('./routers/company');
+const employeeRouter = require('./routers/employee');
+const authRouter = require('./routers/auth');
+const connectDB = require('./database');
+const port = 3000;
 
+connectDB();
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use('/api', router);
 
-mongoose.connect(process.env.MONGODB_URI, { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true 
-})
-  .then(() => {
-    console.log('Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch(err => console.error('Cannot connect MongoDB: ', err));
+app.use('/auth', authRouter);
+app.use('/api/companies', companyRouter);
+app.use('/api/employees', employeeRouter);
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
