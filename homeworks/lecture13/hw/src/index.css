@@ -1,0 +1,160 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  padding: 20px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+button {
+  border: 1px solid transparent;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: white;
+  border-radius: 7px;
+}
+
+.operation {
+  border: 1px solid #999;
+  width: fit-content;
+  margin: 20px 0;
+  border-radius: 7px;
+}
+
+.active {
+  background-color: #646cff;
+  color: white;
+}
+
+.normal {
+  background-color: white;
+  color: black;
+}
+
+.hw1 {
+  width: 100%;
+  max-width: 500px;
+}
+
+.hw1 .input-box {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.hw1 .input-box:focus {
+  border: 1px solid lightblue;
+  box-shadow: 0 0 0 4px lightblue;
+}
+
+.hw1 .info {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.hw1 .info button {
+  background: white;
+  color: #666;
+  border: 1px solid #666;
+}
+
+.hw1 .mark-all, .hw1 ul li label {
+  cursor: pointer;
+}
+
+.hw1 ul {
+  list-style: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.hw1 ul li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.hw1 ul li:last-of-type {
+  border-bottom: none;
+}
+
+.hw1 label {
+  user-select: none;
+}
+
+.no-border {
+  border: none!important;
+}
+
+.phone {
+  width: 100%;
+  max-width: 375px;
+  min-height: 430px;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+
+.phone .panel {
+  margin: 60px 20px;
+  background: dodgerblue;
+}
+
+.phone .panel h3 {
+  margin: 0;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.phone .panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.phone .panel ul li {
+  width: 18%;
+  height: 0;
+  padding-bottom: 18%;
+  background: white;
+  margin-left: 5.6%;
+  margin-bottom: 5.6%;
+  border-radius: 20%;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.phone .panel ul li:active {
+  background: #ccc;
+}
+
+
+
