@@ -1,0 +1,60 @@
+.hw3 {
+    width: 100%;
+    max-width: 500px;
+}
+
+.input_box {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input_box:focus {
+    border: 1px solid lightblue;
+    box-shadow: 0 0 0 4px lightblue;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.info button {
+    background: white;
+    color: #666;
+    border: 1px solid #666;
+}
+
+.mark_all, ul li label {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+ul li:last-of-type {
+    border-bottom: none;
+}
+
+label {
+    user-select: none;
+}
+
+.no-border {
+    border: none!important;
+}

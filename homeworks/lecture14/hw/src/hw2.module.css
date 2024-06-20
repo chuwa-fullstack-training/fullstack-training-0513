@@ -1,0 +1,104 @@
+.hw2 {
+    width: 100%;
+    flex: 1;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.operation {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    position: relative;
+}
+
+.btn button {
+    padding: 10px;
+    background: gray;
+    color: white;
+}
+
+.btn button img {
+    width: 16px;
+}
+
+.btn ul {
+    list-style: none;
+    min-width: 140px;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    top: 45px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn ul li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.block {
+    width: 30%;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+
+.block input {
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
+.block input:focus {
+    outline: lightblue;
+    border: 1px solid lightblue;
+    box-shadow: 0 0 4px lightblue;
+}
+
+.blue {
+    background: #646cff;
+}
+
+.red {
+    background: red;
+}
+
+.orange {
+    background: coral;
+}
+
+.lightblue {
+    background: lightblue;
+}
+
+.antiquewhite {
+    background: antiquewhite;
+}
+
+.cadetblue {
+    background: cadetblue;
+}
+
