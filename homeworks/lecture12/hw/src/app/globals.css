@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html, #__next {
+  height: 100%;
+  margin: 0;
+}
+
+.grid-rows-layout {
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.grid-cols-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 
+    "header header"
+    "nav nav"
+    "aside main"
+    "footer footer";
+  height: 100vh;
+}
+
+header {
+  grid-area: header;
+  background: #4CAF50;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+nav {
+  grid-area: nav;
+  background: #333;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+aside {
+  grid-area: aside;
+  background: #f4f4f4;
+  padding: 1rem;
+}
+
+main {
+  grid-area: main;
+  background: #fff;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+footer {
+  grid-area: footer;
+  background: #4CAF50;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
