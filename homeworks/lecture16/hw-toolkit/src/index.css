@@ -1,0 +1,111 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  padding: 20px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+button {
+  border: 1px solid transparent;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: white;
+  border-radius: 7px;
+}
+
+.operation {
+  border: 1px solid #999;
+  width: fit-content;
+  margin: 20px 0;
+  border-radius: 7px;
+}
+
+.active {
+  background-color: #646cff;
+  color: white;
+}
+
+.normal {
+  background-color: white;
+  color: black;
+}
+
+.todo {
+  width: 100%;
+  max-width: 500px;
+}
+
+.todo .input-box {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.todo .input-box:focus {
+  border: 1px solid lightblue;
+  box-shadow: 0 0 0 4px lightblue;
+}
+
+.todo .info {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.todo .info button {
+  background: white;
+  color: #666;
+  border: 1px solid #666;
+}
+
+.todo .mark-all, .todo ul li label {
+  cursor: pointer;
+}
+
+.todo ul {
+  list-style: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.todo ul li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.todo ul li:last-of-type {
+  border-bottom: none;
+}
+
+.todo label {
+  user-select: none;
+}
+
+.no-border {
+  border: none!important;
+}
