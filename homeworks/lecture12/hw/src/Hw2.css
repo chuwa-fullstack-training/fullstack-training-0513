@@ -1,0 +1,38 @@
+.container{
+    display:flex;
+    flex-direction:column;
+    height: 100vh;
+}
+
+.content{
+    display:flex;
+    flex:1;
+}
+
+header, footer{
+    padding:10px;
+    margin:10px;
+    border:1px solid black;
+    height: 60px;
+}
+
+nav{
+    padding:10px;
+    margin:10px;
+    border:1px solid black;
+    height: 30px;
+}
+
+aside{
+    flex:1;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+}
+
+section{
+    flex:2;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+}
