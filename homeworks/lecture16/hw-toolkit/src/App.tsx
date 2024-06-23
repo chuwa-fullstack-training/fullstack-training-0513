@@ -1,65 +1,45 @@
 import React, {useState} from 'react';
-
-interface todoType {
-  id: string,
-  check: boolean,
-  text: string
-}
+import { useAppDispatch, useAppSelector } from './app/hooks';
+import { addTodo, toggleTodo, toggleAll, clearCompleted } from './app/reducers';
 
 const App = () => {
 
+  const list = useAppSelector((state) => state.todo);
+  const dispatch = useAppDispatch();
+
   const [todo, setTodo] = useState('');
-  const [list, setList] = useState<todoType[]>([]);
   const [remaining, setRemaining] = useState(0);
   const [isMarkAll, setIsMarkAll] = useState(false);
 
-  const clearCompleted = (): void => {
-    const newList: todoType[] = list.map(item => {
-      item.check = false;
-      return item;
-    });
-    setRemaining(newList.length);
+  const clear = (): void => {
+    dispatch(clearCompleted());
+    setRemaining(list.length);
     setIsMarkAll(false);
-    setList(newList);
   };
 
   const keyUp = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.code === 'Enter') {
       if (todo === '') return;
-      const t: todoType = {
-        id: new Date().getTime().toString(),
-        check: false,
-        text: todo
-      }
-      setList([...list, t]);
+      dispatch(addTodo(todo));
       setTodo('');
       setRemaining(remaining + 1);
     }
   };
 
   const markAll = (): void => {
-    const newList: todoType[] = list.map(item => {
-      item.check = !isMarkAll;
-      return item;
-    });
-    setRemaining(isMarkAll ? newList.length : 0);
+    dispatch(toggleAll(!isMarkAll));
+    setRemaining(isMarkAll ? list.length : 0);
     setIsMarkAll(!isMarkAll);
-    setList(newList);
   };
 
   const markOne = (id: string): void => {
-    let remain = remaining;
-    const newList: todoType[] = list.map(item => {
-      if (item.id === id) {
-        if (item.check) remain++;
-        else remain--;
-        item.check = !item.check;
-      }
-      return item;
-    });
-    setRemaining(remain);
-    setIsMarkAll(remain === 0);
-    setList(newList);
+    const t = list.find((item) => item.id === id);
+    let r = remaining;
+    if (t && t.check) r = r + 1;
+    else r = r - 1;
+    dispatch(toggleTodo(id));
+    setRemaining(r);
+    setIsMarkAll(r === 0);
   };
 
   return (
@@ -74,7 +54,7 @@ const App = () => {
                }}/>
         <div className="info">
           <p>{remaining} remaining</p>
-          <button onClick={clearCompleted}>Clear Completed Todos</button>
+          <button onClick={clear}>Clear Completed Todos</button>
         </div>
         <label className="mark-all">
           <input type="checkbox" checked={isMarkAll} onChange={markAll}/>
