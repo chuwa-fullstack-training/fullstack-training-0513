@@ -1,0 +1,48 @@
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 1px; 
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px rgba(5, 0, 0, 0.853);
+  background-color: #c0c0c0;
+  transition: box-shadow 0.3s ease;
+}
+
+.reset-button {
+  margin-top: 20px;
+  background-color: #c0c0c0;
+}
+
+button:hover {
+  box-shadow: 5px 5px 5px rgba(0, 123, 255, 0.5);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+h1 {
+  font-size: 28px;
+  margin: 0;
+  color: #333;
+  align-self: flex-start;
+}
