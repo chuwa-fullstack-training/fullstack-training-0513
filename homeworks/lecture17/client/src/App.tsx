@@ -35,7 +35,7 @@ const App = () => {
       <div className="container width-600">
         <div className="row">
           <div className="col">
-            <h1>Todo List</h1>
+            <h1>To-do List</h1>
           </div>
         </div>
         <div className="row">
@@ -45,7 +45,7 @@ const App = () => {
                    onChange={(e) => {setTodo(e.target.value)}}/>
           </div>
           <div className="col-4 align-self-center">
-            <button className="btn btn-primary" onClick={handleSubmit}>Add Todo</button>
+            <button className="btn btn-primary" onClick={handleSubmit}>Add To-do</button>
           </div>
         </div>
         <div className="margin-top-20">
