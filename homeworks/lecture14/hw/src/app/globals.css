@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html, #__next {
+  height: 100%;
+  margin: 0;
+}
+
+nav {
+  background: #333;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
