@@ -1,0 +1,73 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.width-600 {
+  width: 600px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+.loading img {
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
