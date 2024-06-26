@@ -9,3 +9,5 @@ Requirements:
 - [ ] Display the number of active todos
 
 ![Todo List](./todo-list.gif)
+
+//Finished and please see Lec13 HW1.mov for result and TodoList.js for my code

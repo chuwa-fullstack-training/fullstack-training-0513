@@ -1,0 +1,97 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+.phone-container {
+  width: 375px;
+  height: 667px;
+  border: 1px solid #020000;
+  border-radius: 30px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px; 
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.status-bar {
+  width: 100%;
+  height: 50px;
+  background-color: #0066cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #0b0202;
+  position: relative;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.status-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px dashed #120202;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.button-panel {
+  border-left: 1px solid #020000;
+  border-right: 1px solid #020000;
+  border-bottom: 1px solid #020000;
+  flex: 1;
+  background-color: #0066cc;
+  padding: 10px 10px 40px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+  position: relative;
+}
+
+.phone-button {
+  width: calc(23% - 10px);
+  height: calc(15% - 10px);
+  border-radius: 20%;
+  background-color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.phone-button:active {
+  background-color: #ddd;
+}
+
+.transparent-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(10% * 2 + 10px * 2 + 20px);
+  background-color: rgba(255, 255, 255, 0.5); 
+  pointer-events: none; 
+}
