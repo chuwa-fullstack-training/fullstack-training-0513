@@ -1,0 +1,29 @@
+.converter-container {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    padding: 10px;
+    font-size: 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.output {
+    padding: 10px;
+    font-size: 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+    background-color: #f9f9f9;
+}

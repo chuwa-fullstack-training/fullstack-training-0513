@@ -1,0 +1,45 @@
+.counter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #bbb;
+}
+
+.count-display {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.reset-button {
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    background-color: #ff6666;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #ff4d4d;
+}
