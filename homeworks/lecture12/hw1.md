@@ -10,3 +10,5 @@
 ```
 
 Turn the HTML above into React components and display
+
+//Finished and see my-app folder hw1.js
