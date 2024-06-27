@@ -1,0 +1,34 @@
+.user-list {
+    width: 40%;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .user-item {
+    display: flex;
+    justify-content:space-between;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .user-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+  }
+  
+  .username {
+    font-size: 1.2rem;
+  }
+  
+  .user-index {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  
