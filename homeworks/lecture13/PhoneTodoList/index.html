@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos in Phone Layout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="phone">
+        <div class="status-bar">2 remaining</div>
+        <div class="todo-container">
+            <input type="text" id="new-todo" placeholder="Type a todo and hit Enter" />
+            <button onclick="addTodo()">Add Todo</button>
+            <ul id="todo-list"></ul>
+            <button onclick="clearCompleted()">Clear Completed Todos</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

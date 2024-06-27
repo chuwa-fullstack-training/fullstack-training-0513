@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos - ReactJs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="todo-container">
+        <h1>Todos - ReactJs</h1>
+        <input type="text" id="new-todo" placeholder="Type a todo and hit Enter" />
+        <div id="todo-stats">
+            <span id="remaining-count">2 remaining</span>
+            <button onclick="clearCompleted()">Clear Completed Todos</button>
+        </div>
+        <div>
+            <input type="checkbox" id="mark-all-done">
+            <label for="mark-all-done">Mark All Done</label>
+        </div>
+        <ul id="todo-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
