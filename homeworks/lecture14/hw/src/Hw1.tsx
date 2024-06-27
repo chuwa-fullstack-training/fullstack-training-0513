@@ -101,6 +101,7 @@ const Hw1 = () => {
         ))}
       </ul>
       <div className="detail-container">
+        {!user && <p>This is a loading page, Select a user to see details</p>}
         {loading ? (
           <div className="loader">
             <div className="loader-image">

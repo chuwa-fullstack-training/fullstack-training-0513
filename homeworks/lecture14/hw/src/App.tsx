@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import Hw1 from './Hw1'
+import Hw2 from './Hw2'
+import Hw3 from './Hw3'
 
 function App() {
   const [tab, setTab] = useState(1)
@@ -29,8 +31,8 @@ function App() {
         </button>
       </div>
       {tab === 1 && <Hw1 />}
-      {tab === 2 && <div>Homework 2</div>}
-      {tab === 3 && <div>Homework 3</div>}
+      {tab === 2 && <Hw2 />}
+      {tab === 3 && <Hw3 />}
     </div>
   )
 }
