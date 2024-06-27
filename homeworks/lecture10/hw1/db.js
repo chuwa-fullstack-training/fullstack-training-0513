@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const pwd = "Wu753951#";
+const pwd = process.env.MONGODB_ATLAS_PWD;
 const uri = `mongodb+srv://degjnd:${encodeURIComponent(pwd)}@cluster0.hpelqzn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.connect(uri, {

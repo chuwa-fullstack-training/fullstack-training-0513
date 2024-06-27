@@ -1,0 +1,8 @@
+#app_container {
+    display: flex;
+    height: 600px
+}
+
+#info_container {
+    padding-left: 10px;
+}

@@ -1,0 +1,32 @@
+#bottompart {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    height: 100px;
+    align-items: center;
+}
+
+.centercontent_bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item_bottom {
+    background-color: white;
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+}
+
+.h75px {
+    height: 75px;
+}
+
+.clickable:active {
+    background-color: rgb(198, 198, 198);
+}
+
+.clickable:hover {
+    cursor: pointer;
+}

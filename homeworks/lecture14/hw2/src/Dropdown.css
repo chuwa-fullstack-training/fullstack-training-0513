@@ -1,0 +1,41 @@
+.dropdown_menu {
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    display: block;
+    background-color: white;
+    min-width: 150px;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown_item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown_item:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+.dropdown_item:active {
+    background-color: rgb(0, 81, 255);
+    color: white;
+}
+
+.dropbutton {
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.dropbutton:active {
+    outline: 4px solid rgb(219, 219, 219);
+}

@@ -1,15 +1,32 @@
 const db = require("./db");
 const { createCompany, getCompanyById, createEmployee, getEmployeeById, updateCompanyById, updateEmployeeById,
      deleteCompanyById, deleteEmployeeById, getAllCompanies, getAllEmployees, getAllEmployeesByCompany, } = require("./queries");
-
+const { Company, Employee } = require("./schemas")
 const express = require("express");
 const bodyParser = require('body-parser');
-const JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken');
+const secret_key = process.env.JWT_KEY;
 
 const app = express();
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+function verifyToken(req, res, next) {
+    const token = req.headers['x-access-token'];
+    if (!token) {
+        req.userId = null;
+        next();
+    } else {
+        jwt.verify(token, secret_key, (err, decoded) => {
+            if (err) {
+                req.userId = null
+            } else {
+                req.userId = decoded.id;
+            }
+            next();
+        });
+    }
+}
 
 app.post("/api/company", (req, res) => {
     console.log(req.body);
@@ -47,12 +64,50 @@ app.get("/api/company/:id", (req, res) => {
     });
 });
 
-app.get("/api/employee/:id", (req, res) => {
+// protected route
+app.get("/api/employee/:id", verifyToken, (req, res) => {
     getEmployeeById(req.params.id).then( r => {
+        if (req.userId === null) {
+            res.send({
+                firstName: r.firstName,
+                lastName: r.lastName
+            });
+        } else {
+            res.send(r);
+        }
+    }).catch(err => {
+        res.send( "500 -- " + err.toString());
+    });
+});
+
+app.get("/api/company", (req, res) => {
+    getAllCompanies().then(r => {
         res.send(r);
     }).catch(err => {
         res.send( "500 -- " + err.toString());
     });
+});
+
+// protected route
+app.get("/api/employee", verifyToken, (req, res) => {
+    
+    if (req.userId === null) {
+        res.statusCode = 401
+        res.send({auth: false, info: "unauthorized"});
+    } else {
+        getEmployeeById(req.userId).then(r => {
+            return Company.findById(r.company);
+        })
+        .then(r => {
+            return getAllEmployeesByCompany(r.id);
+        })
+        .then(r => {
+            res.send(r);
+        })
+        .catch(err => {
+            res.send( "500 -- " + err.toString());
+        });
+    }
 });
 
 app.patch("/api/company/:id", (req, res) => {
@@ -89,41 +144,20 @@ app.delete("/api/employee/:id", (req, res) => {
     })
 });
 
-app.get("/api/company", (req, res) => {
-    getAllCompanies().then(r => {
-        res.send(r);
-    }).catch(err => {
-        res.send( "500 -- " + err.toString());
-    });
-});
-
-app.get("/api/employee", (req, res) => {
-    if ("companyId" in req.query) {
-        getAllEmployeesByCompany(req.query.companyId).then(r => {
-            res.send(r);
-        }).catch(err => {
-            res.send( "500 -- " + err.toString());
-        });
-    } else {
-        getAllEmployees().then(r => {
-            res.send(r);
-        }).catch(err => {
-            res.send( "500 -- " + err.toString());
-        });
-    }
-});
-
 app.post("/api/login", (req, res) => {
     getEmployeeById(req.body.id).then((emp) => {
         if (emp === null) {
-            res.send("No such user id found. <a href=\"/api/login\">return to login</a>");
+            res.statusCode = 404;
+            res.send({auth: false, info: "username not found"});
             return;
         } 
-        if (emp.firstName === req.body.firstName 
-                && emp.lastName === req.body.lastName) {
-            
+        if (emp.firstName === req.body.firstName) {
+            const token = jwt.sign({id: req.body.id}, secret_key, { expiresIn: 86400 } );
+            res.send({auth: true, info: "success", token: token});
+            return
         } else {
-            res.send("Authentication failed. <a href=\"/api/login\">return to login</a>");
+            res.statusCode = 401;
+            res.send({auth: false, info: "password incorrect"});
         }
     }).catch(err => {
         res.send( "500 -- " + err.toString());

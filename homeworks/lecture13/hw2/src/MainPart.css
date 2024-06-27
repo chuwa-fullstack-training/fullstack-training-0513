@@ -1,0 +1,27 @@
+#mainpart {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    height: 300px;
+}
+
+.centercontent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    background-color: white;
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+}
+
+.clickable:active {
+    background-color: rgb(198, 198, 198);
+}
+
+.clickable:hover {
+    cursor: pointer;
+}

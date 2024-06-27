@@ -1,0 +1,6 @@
+export const ADD_TODO_LIST = "ADD_TODO_LIST";
+export const TOGGLE_DONE = "MARK_DONE";
+export const MARK_ALL_DONE = "MARK_ALL_DONE";
+export const CLEAR_DONE = "CLEAR_DONE";
+export const CHANGE_INPUT_DATA = "CHANGE_INPUT_DATA";
+export const TOGGLE_ALL_DONE_CHECKED = "TOGGLE_ALL_DONE_CHECKED"

@@ -1,0 +1,20 @@
+#flex1 {
+    display: flex;
+    height: 800px;
+}
+
+#aside1 {
+    width: 100px;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#section1 {
+    background-color: blueviolet;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

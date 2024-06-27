@@ -1,0 +1,31 @@
+#list_container {
+    width: 300px;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+}
+
+#plist_title {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#title_id {
+    width: 18%;
+}
+
+#title_uname {
+    width: 48%;
+}
+
+#title_img {
+    width: 30%;
+}
+
+
+.centertext {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

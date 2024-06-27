@@ -1,0 +1,20 @@
+.formrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+input {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid rgb(181, 181, 181);
+    border-radius: 4px;
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+

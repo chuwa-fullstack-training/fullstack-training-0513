@@ -1,0 +1,30 @@
+#plist_item {
+    display: flex;
+    height: 70px;
+    border-bottom: 1px solid rgb(197, 197, 197);
+}
+
+#plist_id {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#plist_uname {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#plist_img {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    height: 100%;
+}

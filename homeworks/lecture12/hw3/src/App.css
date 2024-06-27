@@ -1,0 +1,12 @@
+button {
+    background-color: aqua;
+    border: none;
+    border-radius: 4px;
+}
+
+#flex1 {
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+
+}

@@ -1,0 +1,14 @@
+#main_container {
+  width: 300px;
+  margin: auto;
+  padding: 10px;
+  background-color: rgb(65, 92, 228);
+}
+
+#bottom_container {
+  width: 300px;
+  margin: auto;
+  padding: 10px;
+  background-color: rgb(126, 146, 247);
+}
+

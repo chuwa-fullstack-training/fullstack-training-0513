@@ -1,0 +1,35 @@
+.listitem {
+    height: 50px;
+    display: flex;
+    border-bottom: solid 1px rgb(206, 206, 206);
+}
+
+.listitem_title {
+    width: 15%;
+}
+
+.listitem_description {
+    width: 35%;
+}
+
+.listitem_created_time {
+    width: 20%;
+}
+
+.listitem_deadline {
+    width: 20%;
+}
+
+.listitem_delete {
+    width: 10%;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bold {
+    font-weight: bold;
+}
