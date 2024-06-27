@@ -1,0 +1,60 @@
+.App, main {
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+
+    height: 100%;
+}
+
+
+.user-title-wrapper {
+    list-style-type: none;
+}
+
+.user-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.5rem;
+
+    padding: 1rem 0rem;
+}
+
+.users {
+    list-style-type: none;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    
+    padding: 1rem 0rem;
+    border-top: 1px solid gray;
+}
+
+.user-info {
+    flex-grow: 3;
+    /* border: 1px solid red; */
+
+    display: flex;
+    justify-content: center;
+}
+
+.user-info-card {
+    align-self: center;
+    justify-self: center;
+    
+    border: 1px solid black;
+    height: 10rem;
+    width: 30rem;
+
+    padding: 1rem;
+}
+
