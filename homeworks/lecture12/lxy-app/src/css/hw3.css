@@ -1,0 +1,15 @@
+.button-container {
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.display {
+    font-size: 30px;
+    font-weight: 600;
+}

@@ -1,0 +1,56 @@
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    line-height: 1.2;
+    font-size: 1rem;
+} */
+/* .app, body, html {
+    height: 100%;
+} */
+
+
+.grid-container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+
+    border: 1px solid black
+}
+
+.grid-container > *{
+    margin: 0.5rem;
+    text-align: center;
+
+    font-size: xx-large;
+}
+header, nav, aside, section, footer {
+    border: 2px solid black;
+    padding: 2rem
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+
+main > * {
+    height: 100%;
+    
+    font-size: xx-large;
+}
+
+aside {
+    flex: 1;
+
+    margin-right: 0.5rem;
+}
+
+section {
+    flex: 3;
+}
+
+
