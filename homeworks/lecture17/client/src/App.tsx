@@ -20,6 +20,7 @@ const App = () => {
       <div className="todoContainer">
         <div className="todoContent">
           <h2>Todos - RTK</h2>
+          {error && <p>{error}</p>}
           <div className="todoInput">
             <input
               type="text"
@@ -38,7 +39,7 @@ const App = () => {
             />
           </div>
           <div className="todoInfo">
-            <span>{todos.filter((todo) => !todo.isDone).length} remaining</span>
+            <span>{todos.filter((todo) => !todo.done).length} remaining</span>
             <p></p>
           </div>
           <ul>
@@ -46,8 +47,8 @@ const App = () => {
               <li key={index}>
                 <input
                   type="checkbox"
-                  onClick={() => dispatch(updateTodo({ id: todo.id }))}
-                  checked={todo.isDone}
+                  onClick={() => dispatch(updateTodo(todo._id))}
+                  checked={todo.done}
                 />
                 <span>{todo.todo}</span>
               </li>

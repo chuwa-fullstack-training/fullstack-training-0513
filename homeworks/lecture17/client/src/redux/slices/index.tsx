@@ -2,21 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export interface todoType {
-  id: number,
+  _id: number,
   todo: string;
-  isDone: boolean;
+  done: boolean;
 }
 
 export interface todoState {
   todos: todoType[];
   loading: boolean;
   error: string | null;
+  status: 'idle' | 'succeeded' | 'failed';
 }
 
 const initialState: todoState = {
   todos: [],
   loading: false,
-  error: null
+  error: null,
+  status: 'idle'
 };
 
 const baseUrl = 'http://localhost:4000/api';
@@ -27,13 +29,13 @@ export const addTodo: any = createAsyncThunk(
     try {
       const response = await fetch(baseUrl + '/todos', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(todo)
       });
-      return await response.json();
+      const data = await response.json();
+      return data;
     } catch (error) {
       return error;
     }
@@ -46,14 +48,12 @@ export const getTodos: any = createAsyncThunk(
     try {
       const response = await fetch(baseUrl, {
         method: 'GET',
-        mode: 'no-cors',
-        // headers: {
-        //   'Content-Type': 'application/json'
-        // }
-      });
-      const data = await response.json();
-      console.log(data);
-      return await response.json();
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const data = await response.json() as todoType[];
+      return data;
     } catch (error) {
       return error;
     }
@@ -62,16 +62,16 @@ export const getTodos: any = createAsyncThunk(
 
 export const updateTodo: any = createAsyncThunk(
   'todos/updateTodo',
-  async (todo: todoType) => {
+  async (id: number) => {
     try {
-      const response = await fetch(baseUrl + '/todos/' + todo.id, {
+      const response = await fetch(baseUrl + '/todos/' + id, {
         method: 'PUT',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
       });
-      return await response.json();
+      const data = await response.json();
+      return data;
     } catch (error) {
       return error;
     }
@@ -86,41 +86,53 @@ const todoSlice = createSlice({
     builder
       .addCase(addTodo.pending, (state) => {
         state.loading = true;
+        state.error = null;
+        state.status = 'idle';
       })
       .addCase(addTodo.fulfilled, (state, action) => {
         state.todos.push(action.payload);
         state.loading = false;
+        state.status = 'succeeded';
       })
       .addCase(addTodo.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
+        state.status = 'failed';
       })
       .addCase(getTodos.pending, (state) => {
         state.loading = true;
+        state.error = null;
+        state.status = 'idle';
       })
       .addCase(getTodos.fulfilled, (state, action) => {
         state.todos = action.payload;
         state.loading = false;
+        state.status = 'succeeded';
       })
       .addCase(getTodos.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
+        state.status = 'failed';
       })
       .addCase(updateTodo.pending, (state) => {
         state.loading = true;
+        state.error = null;
+        state.status = 'idle';
       })
       .addCase(updateTodo.fulfilled, (state, action) => {
         state.todos = state.todos.map(todo => {
-          if (todo.id === action.payload.id) {
+          if (todo._id === action.payload._id) {
             return action.payload;
           }
           return todo;
         });
         state.loading = false;
+        state.status = 'succeeded';
       })
       .addCase(updateTodo.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
+        state.status = 'failed';
       });
   }
 });

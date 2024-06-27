@@ -4,10 +4,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 const connectDB = require('./utils/db');
 const todoRouter = require('./routers/todo');
+const cors = require('cors');
 
 connectDB();
 
 app.use(express.static('public'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
