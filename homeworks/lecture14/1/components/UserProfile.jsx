@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './UserProfile.css';
-import {response} from "express";
 
 const UserProfile = ({username}) => {
     const [user, setUser] = useState(null);
@@ -12,7 +11,7 @@ const UserProfile = ({username}) => {
             .then(data => setUser(data));
         fetch(`https://api.github.com/users/${username}/repos`)
             .then(response => response.json())
-            .then()(data => setRepos(data));
+            .then(data => setRepos(data));
     }, [username])
 
     if (!user) {

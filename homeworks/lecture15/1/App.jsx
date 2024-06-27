@@ -1,46 +1,24 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import GitHubList from './components/GitHubList';
 import UserProfile from './components/UserProfile';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './auth';
 
 const App = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    const login = (username, password) => {
-        if (username === 'admin' && password === 'password') {
-            setIsAuthenticated(true);
-            return true;
-        }
-        return false;
-    };
-
-    const PrivateRoute = ({ component: Component, ...rest }) => (
-        <Route
-            {...rest}
-            render={props =>
-                isAuthenticated ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-                )
-            }
-        />
-    );
-
     return (
         <Router>
-            <Switch>
-                <Route path="/login">
-                    <Login login={login} />
-                </Route>
-                <PrivateRoute path="/users/:login" component={UserProfile} />
-                <PrivateRoute path="/users" component={GitHubList} />
-                <Redirect from="/" to="/login" />
-            </Switch>
+            <AuthProvider>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/users/:login" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+                    <Route path="/users" element={<ProtectedRoute><GitHubList /></ProtectedRoute>} />
+                    <Route path="*" element={<Navigate to="/login" />} />
+                </Routes>
+            </AuthProvider>
         </Router>
     );
 };
 
 export default App;
-

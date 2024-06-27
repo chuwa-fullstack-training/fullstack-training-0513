@@ -15,7 +15,9 @@
     gap: 10px;
 }
 
+
 .colored-component {
+    position: relative;
     width: 200px;
     height: 150px;
     display: flex;
@@ -26,9 +28,16 @@
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .colored-component input {
     width: 80%;
     margin-top: 10px;
+}
+
+.colored-component input,
+.colored-component label {
+    z-index: 2;
+    cursor: text;
 }
