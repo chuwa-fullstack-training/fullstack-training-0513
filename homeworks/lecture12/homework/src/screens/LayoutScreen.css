@@ -1,0 +1,55 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+}
+
+header {
+    border: 1px solid black;
+    padding: 20px;
+    margin: 5px;
+    background-color: white;
+    height: 10%;
+}
+
+nav {
+    border: 1px solid black;
+    padding: 20px;
+    background-color: white;
+    margin: 5px;
+    height: 5%;
+}
+
+footer {
+    border: 1px solid black;
+    padding: 20px;
+    background-color: white;
+    margin: 5px;
+    height: 10%;
+}
+
+.content{
+    flex: 1;
+    display: flex;
+    height: 30px;
+    height: 60%;
+    
+}
+
+aside {
+    border: 1px solid black;
+    padding: 20px;
+    background-color: white;
+    width: 30%;
+    margin: 5px;
+
+}
+
+section {
+    border: 1px solid black;
+    padding: 20px;
+    background-color: white;
+    width: 70%;
+    margin: 5px;
+}
