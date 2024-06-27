@@ -8,6 +8,7 @@ interface TodoType {
 const Hw3 = () => {
   const [todos, setTodos] = useState<TodoType[]>([])
   const [todoInput, setTodoInput] = useState('')
+  const [checkAll, setCheckAll] = useState(false);
 
   // Add a new todo
   const addTodo = (todo: string) => {
@@ -24,6 +25,7 @@ const Hw3 = () => {
 
   // Mark all todos as completed
   const markAll = () => {
+    setCheckAll(!checkAll)
     const newTodos = todos.map(todo => {
       todo.isDone = !todo.isDone
       return todo
@@ -32,6 +34,7 @@ const Hw3 = () => {
   }
 
   const removeCompleted = () => {
+    setCheckAll(false)
     const newTodos = todos.filter(todo => !todo.isDone)
     setTodos(newTodos)
   }
@@ -46,7 +49,7 @@ const Hw3 = () => {
                 setTodoInput(e.target.value)
               }}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && todoInput) {
                   addTodo(todoInput)
                   setTodoInput('')
                 }
@@ -59,7 +62,7 @@ const Hw3 = () => {
             <button onClick={removeCompleted}>Clear Completed Todos</button>
           </div>
           <div className='markAll'>
-            <input type='checkbox' id='toggleAll' onClick={markAll} />
+            <input type='checkbox' id='toggleAll' onClick={markAll} checked={checkAll} />
             <label htmlFor="toggleAll">Mark All Done</label>
           </div>
           <ul>
