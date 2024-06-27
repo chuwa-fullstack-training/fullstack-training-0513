@@ -139,4 +139,5 @@ app.get("/companies/:id/employees", async (req, res) => {
     res.json({ error: error.message });
   }
 });
+
 app.listen(port, () => console.log("server is running on port " + port));

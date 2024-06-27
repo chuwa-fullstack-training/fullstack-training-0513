@@ -40,5 +40,7 @@ html(lang="en")
                             )
                         div.col
                             label(for= todo.name) #{todo.name}
+                        div.col
+                            button(class="btn" onclick="handleDelete(this)" data-id= todo.id) X 
         script
             include ../public/main.js

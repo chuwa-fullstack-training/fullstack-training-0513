@@ -9,14 +9,13 @@ const Hw3 = ()=>{
         setCount(count+val);
     }
     return (
-        <>
+        <div>
             <button onClick={()=>handleClick(1)}>+1</button>
             <button onClick={()=>handleClick(10)}>+10</button>
             <button onClick={()=>handleClick(100)}>+100</button>
             <button onClick={()=>handleClick(1000)}>+1000</button>
             <p>{count}</p>
-        </>
+        </div>
     )
 }
-
 export default Hw3;
