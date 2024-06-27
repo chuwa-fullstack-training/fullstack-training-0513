@@ -1,0 +1,38 @@
+.user-list {
+  flex: 1;
+  margin-right: 200px;
+}
+
+.user-profile {
+  flex: 1;
+}
+
+.user-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd; 
+}
+
+.user-list li.header {
+  font-weight: bold;
+}
+
+.user-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.user-list .id, .user-list .username, .user-list .avatar {
+  flex: 1;
+}
+
+.user-list .avatar img {
+  width: 100px; /* 固定宽度 */
+  height: 100px; /* 固定高度 */
+}
