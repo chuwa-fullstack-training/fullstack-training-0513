@@ -1,0 +1,27 @@
+.converter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .number-input, .ordinal-output {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+    width: 300px;
+  }
+  
+  .number-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .ordinal-output {
+    border: 1px solid #eee;
+    background-color: #f9f9f9;
+    color: #666;
+  }
+  
