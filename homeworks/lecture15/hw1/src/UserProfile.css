@@ -1,0 +1,22 @@
+.user-profile-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .user-profile-page img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .user-profile-page ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-profile-page li {
+    margin: 10px 0;
+  }
+  

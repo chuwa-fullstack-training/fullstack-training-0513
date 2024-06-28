@@ -1,0 +1,28 @@
+.user-list-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .user-list-page h1 {
+    text-align: center;
+  }
+  
+  .user-list-page ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-list-page li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-list-page li img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
