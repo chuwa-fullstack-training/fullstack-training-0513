@@ -1,0 +1,56 @@
+.app-container {
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+}
+.app-container > * {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.text-field {
+    height: 2rem;
+    border-radius: 4px;
+}
+
+.op-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clear-button {
+    height: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+.clear-button:hover {
+    background-color: grey;
+    border: 2px solid lightgray;
+    color: white;
+}
+
+.complete-all {
+    display: flex;
+    flex-direction: row;
+}
+
+.todolist {
+    list-style-type: none;
+
+    border: 1px solid black;
+    border-radius: 4px;
+    
+    padding-left: 0;
+}
+
+.todo {
+    border-bottom: 1px solid black;
+    margin-bottom: -1px;
+    padding: 0.5rem;
+
+    text-align: left;
+}
+
