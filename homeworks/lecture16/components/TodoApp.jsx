@@ -1,7 +1,7 @@
 // TodoApp.js
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo, toggleTodo, markAllDone, clearCompletedTodos, setNewTodo } from './todosSlice';
+import { addTodo, toggleTodo, markAllDone, clearCompletedTodos, setNewTodo } from '../redux/todosSlice';
 import './TodoApp.css';
 
 const TodoApp = () => {
