@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.user-list {
+    width: 300px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+}
+
+.user-profile {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.user {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.user img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.user-profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.user-profile div {
+    margin-top: 10px;
+}
