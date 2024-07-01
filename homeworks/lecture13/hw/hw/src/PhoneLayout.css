@@ -1,0 +1,46 @@
+.phone-container {
+    width: 250px;
+    height: 500px;
+    border: 2px solid #333;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  
+  .status-bar {
+    width: 90%;
+    height: 40px;
+    background-color: #e0e0e0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    width: 90%;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 20px 0;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #2980b9;
+  }
+  
