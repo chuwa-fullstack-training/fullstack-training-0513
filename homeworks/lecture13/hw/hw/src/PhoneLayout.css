@@ -6,19 +6,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #1d70d6;
   }
   
   .status-bar {
     width: 90%;
     height: 40px;
-    background-color: #e0e0e0;
+    background-color: #1d70d6;
     margin: 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    color: #333;
+    color: black;
   }
   
   .buttons-grid {
@@ -31,8 +31,8 @@
   .button {
     width: 100%;
     padding: 20px 0;
-    background-color: #3498db;
-    color: white;
+    background-color: #ebeff1;
+    color: black;
     font-size: 16px;
     border: none;
     border-radius: 10px;
