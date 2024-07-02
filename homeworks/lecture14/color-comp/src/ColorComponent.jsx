@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function ColorComponent({ k, name, color, onNameChange, isSelected }) {
     const [inputValue, setInputValue] = useState(name);
