@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-dom'
 
 function ColorComponent({ k, name, color, onNameChange, isSelected }) {
     const [inputValue, setInputValue] = useState(name);
@@ -18,14 +17,17 @@ function ColorComponent({ k, name, color, onNameChange, isSelected }) {
     ), [color, isSelected]);
 
     return (
-        <div style={{ border: '1px solid black', margin: '10px', padding: '10px', backgroundColor: color }}>
-          <div>Component name:</div>
-          <input type="text" value={inputValue} onChange={handleChange} />
-          <div>
-            <Link to="/">Back to Home</Link>
-          </div>
+        <div style={{ 
+        border: '1px solid black', 
+        margin: '10px', 
+        padding: '10px', 
+        backgroundColor: myColor, 
+        flex: '1 0 30%' 
+        }}>
+        <div>Component name:</div>
+        <input type="text" value={inputValue} onChange={handleChange} />
         </div>
-      );
+    );
 
 }
 
