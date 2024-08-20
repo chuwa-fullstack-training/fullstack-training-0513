@@ -20,7 +20,7 @@ const path = require('path');
 const hw1Router = express.Router();
 
 hw1Router.get('/:dir/:ext', (req, res) => {
-    const directory = path.join(__dirname, 'hw1', req.params.dir); // 修改路径拼接
+    const directory = path.join(__dirname, 'hw1', req.params.dir); 
     const extension = `.${req.params.ext}`;
 
     fs.readdir(directory, (err, files) => {
