@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 2px solid black;
+}
+
+.header, .nav, .footer, .aside, .section {
+  border: 1px solid black;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+  font-weight: bold;
+  color: #5C5C5C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.aside, .section {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.header {
+  flex: 0 1 50px;
+}
+
+.nav {
+  flex: 0 1 40px;
+}
+
+.footer {
+  flex: 0 1 50px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  margin: 10px;
+}
+
+.aside {
+  flex: 1;
+}
+
+.section {
+  flex: 2;
+}
+
